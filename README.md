@@ -1,0 +1,2 @@
+# Rhinoceromance
+Rhinoceromance ~Horny for You~ (pending title) is a rhino dating sim where players take on the role of Sudan and try to woo one of two lovely lady rhinos, Najin and Fatu. The players must manage their time between going on dates and raising their stats in order to impress their love interests. If they are unable to win the other rhinos’ love, the species will go extinct! The game features multiple endings, time-management stat raising, and narrative events.
