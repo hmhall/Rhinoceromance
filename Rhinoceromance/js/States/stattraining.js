@@ -9,7 +9,6 @@ var StatTraining={
 		var gorillabutton = game.add.button(700, 500, "gorilla", function(){if(day<30){gorillacount++;day++;}}, this);
 		gorillabutton.scale.setTo(.25,.25);
 		var sudansprite = game.add.sprite(300,300,"sudan");
-		sudansprite.scale.setTo(.5,.5);
 
 		this.elephanttext=game.add.text(50, 50, "Leg face man points: 0", { fontSize: '32px', fill: 'white' }); //displays each stat
 		this.snaketext=game.add.text(50, 250, "Long mover points: 0", { fontSize: '32px', fill: 'white' });
