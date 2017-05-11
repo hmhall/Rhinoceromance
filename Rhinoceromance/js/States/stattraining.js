@@ -2,6 +2,10 @@
 var StatTraining={
 	create: function(){ //creates everything needed for the current state
 		console.log("StatTraining: create");
+		elephantcount=0;
+		snakecount=0;
+		gorillacount=0;
+
 		var elephantbutton = game.add.button(700, 0, "elephant", function(){if(day<30){elephantcount++;day++;}}, this); //buttons increase scores/days when pressed
 		elephantbutton.scale.setTo(.5,.5);
 		var snakebutton = game.add.button(700, 200, "snake", function(){if(day<30){snakecount++;day++;}}, this);
