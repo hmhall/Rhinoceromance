@@ -5,13 +5,13 @@ var StatTraining={
 		var apartmentbg=game.add.sprite(0,0,"apartment");
 		apartmentbg.scale.setTo(.79,.79);
 
-		var sudansprite = game.add.sprite(game.world.width/2,game.world.height/2+100,"base");
-		sudansprite.scale.setTo(.75,.75);
-		sudansprite.anchor.x=.5;
-		sudansprite.anchor.y=.5;
+		this.sudansprite = game.add.sprite(game.world.width/2,game.world.height/2+100,"base");
+		this.sudansprite.scale.setTo(.75,.75);
+		this.sudansprite.anchor.x=.5;
+		this.sudansprite.anchor.y=.5;
 
 		//creates buttons for each action that have text created on top of them
-		var charmbutton = game.add.button(850, 100, "buttonsheet", function(){if(day<30){charm++;day++;}},this,"over", "out", "down"); 
+		var charmbutton = game.add.button(850, 100, "buttonsheet", function(){this.actionButtonPressed(1);},this,"over", "out", "down"); 
 		charmbutton.scale.setTo(.5,.5);
 		charmbutton.anchor.x=.5;
 		charmbutton.anchor.y=.5;
@@ -19,7 +19,7 @@ var StatTraining={
 		charmbuttontext.anchor.x=.5;
 		charmbuttontext.anchor.y=.5;
 
-		var fitnessbutton = game.add.button(850, 200, "buttonsheet", function(){if(day<30){fitness++;day++;}},this,"over", "out", "down"); 
+		var fitnessbutton = game.add.button(850, 200, "buttonsheet", function(){this.actionButtonPressed(2);},this,"over", "out", "down"); 
 		fitnessbutton.scale.setTo(.5,.5);
 		fitnessbutton.anchor.x=.5;
 		fitnessbutton.anchor.y=.5;
@@ -27,7 +27,7 @@ var StatTraining={
 		fitnessbuttontext.anchor.x=.5;
 		fitnessbuttontext.anchor.y=.5;
 
-		var smartsbutton = game.add.button(850, 300, "buttonsheet", function(){if(day<30){smarts++;day++;}},this,"over", "out", "down"); 
+		var smartsbutton = game.add.button(850, 300, "buttonsheet", function(){this.actionButtonPressed(3);},this,"over", "out", "down"); 
 		smartsbutton.scale.setTo(.5,.5);
 		smartsbutton.anchor.x=.5;
 		smartsbutton.anchor.y=.5;
@@ -35,7 +35,7 @@ var StatTraining={
 		smartsbuttontext.anchor.x=.5;
 		smartsbuttontext.anchor.y=.5;
 
-		var stylebutton = game.add.button(850, 400, "buttonsheet", function(){if(day<30){style++;day++;}},this,"over", "out", "down"); 
+		var stylebutton = game.add.button(850, 400, "buttonsheet", function(){this.actionButtonPressed(4);},this,"over", "out", "down"); 
 		stylebutton.scale.setTo(.5,.5);
 		stylebutton.anchor.x=.5;
 		stylebutton.anchor.y=.5;
@@ -43,7 +43,7 @@ var StatTraining={
 		stylebuttontext.anchor.x=.5;
 		stylebuttontext.anchor.y=.5;
 
-		var stressbutton = game.add.button(850, 500, "buttonsheet", function(){if(day<30){stress++;day++;}},this,"over", "out", "down"); 
+		var stressbutton = game.add.button(850, 500, "buttonsheet", function(){this.actionButtonPressed(5);},this,"over", "out", "down"); 
 		stressbutton.scale.setTo(.5,.5);
 		stressbutton.anchor.x=.5;
 		stressbutton.anchor.y=.5;
@@ -51,7 +51,7 @@ var StatTraining={
 		stressbuttontext.anchor.x=.5;
 		stressbuttontext.anchor.y=.5;
 
-		var moneybutton = game.add.button(850, 600, "buttonsheet", function(){if(day<30){money++;day++;}},this,"over", "out", "down"); 
+		var moneybutton = game.add.button(850, 600, "buttonsheet", function(){this.actionButtonPressed(6);},this,"over", "out", "down"); 
 		moneybutton.scale.setTo(.5,.5);
 		moneybutton.anchor.x=.5;
 		moneybutton.anchor.y=.5;
@@ -98,5 +98,40 @@ var StatTraining={
 			this.datebutton=game.add.button(700,600,"heart",function(){this.state.start("DateNight");},this); //when clicked, moves to DateNight
 			this.datebutton.scale.setTo(.075,.075);
 		}
+		if(actiontaken!=0){
+			switch(actiontaken){
+				case 1:
+					this.sudansprite.loadTexture("sudan");
+					break;
+				case 2:
+					this.sudansprite.loadTexture("exercising");
+					break;
+				case 3:
+					this.sudansprite.loadTexture("studying");
+					break;
+				case 4:
+					this.sudansprite.loadTexture("stylin");
+					break;
+				case 5:
+					this.sudansprite.loadTexture("resting");
+					break;
+				case 6:
+					this.sudansprite.loadTexture("sudan");
+					break;
+			}
+			this.nextbutton=game.add.button(750,650,"nextbutton",this.resetDay,this,"over","out","down");
+			this.nextbutton.scale.setTo(.75,.75);
+			actiontaken=0;
+		}
 	},
+	actionButtonPressed: function(actiontype){
+		console.log("StatTraining: actionButtonPressed");
+		actiontaken=actiontype;
+		this.state.start("MiniGames");
+	},
+	resetDay: function(button){
+		this.sudansprite.loadTexture("base");
+		day++;
+		this.nextbutton.destroy();
+	}
 };
