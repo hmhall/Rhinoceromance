@@ -1,5 +1,6 @@
 // Mistakes into Miracles
 //initialize game
+
 var game = new Phaser.Game(1000, 800, Phaser.AUTO);
 //add states
 game.state.add("Preloader", Preloader);
