@@ -2,8 +2,8 @@
 var Mainmenu={
 	create: function(){ //creates everything needed for main menu
 		console.log('Mainmenu: create');
-		var startbutton = game.add.button(game.world.centerX/2, 50, "atlas", this.start, this, "jumping", "idle1", "damaged"); //add button
-		this.add.text(150,game.world.height/2,"Click the funny little man to start",{fontSize: "32px", fill: "white" });
+		var startbutton = game.add.button(game.world.width/2, 50, "buttonsheet", this.start, this, "over", "out", "down"); //add button
+		this.add.text(game.world.width/2, 50,"Click the button to start",{fontSize: "32px", fill: "white" });
 	},
 	start: function(){ //changes state when the button is pressed
 		console.log('Mainmenu: start');
