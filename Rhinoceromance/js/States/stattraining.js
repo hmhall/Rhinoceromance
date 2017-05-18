@@ -98,7 +98,7 @@ var StatTraining={
 			this.datebutton=game.add.button(700,600,"heart",function(){this.state.start("DateNight");},this); //when clicked, moves to DateNight
 			this.datebutton.scale.setTo(.075,.075);
 		}
-		if(actiontaken!=0){
+		if(actiontaken>0){
 			switch(actiontaken){
 				case 1:
 					this.sudansprite.loadTexture("sudan");
@@ -121,17 +121,20 @@ var StatTraining={
 			}
 			this.nextbutton=game.add.button(750,650,"nextbutton",this.resetDay,this,"over","out","down");
 			this.nextbutton.scale.setTo(.75,.75);
-			actiontaken=0;
+			actiontaken=-1;
 		}
 	},
 	actionButtonPressed: function(actiontype){
 		console.log("StatTraining: actionButtonPressed");
-		actiontaken=actiontype;
-		this.state.start("MiniGames");
+		if(actiontaken==0){
+			actiontaken=actiontype;
+			this.state.start("MiniGames");
+		}
 	},
 	resetDay: function(button){
 		this.sudansprite.loadTexture("base");
 		day++;
 		this.nextbutton.destroy();
+		actiontaken=0;
 	}
 };

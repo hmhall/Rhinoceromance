@@ -2,7 +2,6 @@
 var Preloader={
 	preload: function() { // preload assets
 		console.log('Preloader: preload');
-<<<<<<< HEAD
 		this.load.atlas("buttonsheet","assets/img/buttonsheet.png","assets/img/buttonsheet.json");
 		this.load.atlas("nextbutton","assets/img/nextbutton.png","assets/img/nextbutton.json");
 		this.load.image("sudan","assets/img/sudan.png");
@@ -16,7 +15,6 @@ var Preloader={
 		this.load.image("stylin","assets/img/stylin.png");
 		this.load.image("statwindow","assets/img/statwindow.png");
 		this.load.image("daytimer","assets/img/daytimer.png");
-=======
 		this.load.path = 'assets/';
 		
 		this.load.atlas("buttonsheet","img/buttonsheet.png","img/buttonsheet.json");
@@ -31,7 +29,6 @@ var Preloader={
 		this.load.audio("keypress", "audio/key.wav");
 
 		this.load.bitmapFont('blackFont','font/black.png', 'font/black.fnt');
->>>>>>> 33c673bcf865b710aeea6f7ba5299e5bb1c80806
 	},
 	create: function() {
 		console.log('Preloader: create');
