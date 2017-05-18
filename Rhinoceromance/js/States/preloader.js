@@ -18,6 +18,7 @@ var Preloader={
 		this.load.image("resting","img/rest.png");
 		this.load.image("studying","img/study.png");
 		this.load.image("stylin","img/stylin.png");
+		this.load.image("cannery", "img/cannery.png");
 
 		this.load.audio("keypress", "audio/key.wav");
 
