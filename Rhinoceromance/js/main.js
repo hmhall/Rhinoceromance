@@ -1,7 +1,7 @@
 // Mistakes into Miracles
 //initialize game
 
-var game = new Phaser.Game(1000, 800, Phaser.AUTO);
+var game = new Phaser.Game(1280, 720, Phaser.AUTO);
 //add states
 game.state.add("Preloader", Preloader);
 game.state.add("Mainmenu", Mainmenu);
@@ -17,6 +17,5 @@ var fitness=10;
 var smarts=10;
 var style=10;
 var stress=0;
-var money=0;
 
 var actiontaken=0;

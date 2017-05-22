@@ -8,7 +8,7 @@ var Mainmenu={
 		var titletY = new Typewriter();
 		titletY.init(Mainmenu, {
 			x: 100,
-			y: 600,
+			y: 500,
 			fontFamily: "blackFont",
 			fontSize: 32,
 			maxWidth: 800,
