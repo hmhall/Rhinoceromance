@@ -7,7 +7,6 @@ var DateNight={
 
 		this.add.text(25, 650,"Thank you for playing our first build!",{fontSize: "32px", fill: "black" });
 		this.add.text(25, 700,"(Date and minigames coming soon.)",{fontSize: "32px", fill: "black" });
-
 	},
 	update: function(){
 		
