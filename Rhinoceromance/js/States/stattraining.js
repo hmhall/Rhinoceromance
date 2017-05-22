@@ -11,12 +11,11 @@ var StatTraining={
 		this.sudansprite.anchor.y=.5;
 
 		this.buttonArray=[];
+		this.buttontext=[];
 
 		//creates buttons for each action that have text created on top of them
 		if(actiontaken<=0){
 			this.setupButtons();
-
-
 		}
 
 		
@@ -28,7 +27,6 @@ var StatTraining={
 		this.smartstext=game.add.text(35, 220, "Smarts: 10", { fontSize: '32px', fill: 'white' });
 		this.styletext=game.add.text(35, 270, "Style: 10", { fontSize: '32px', fill: 'white' });
 		this.stresstext=game.add.text(35, 320, "Stress: 0", { fontSize: '32px', fill: 'white' });
-		this.moneytext=game.add.text(35, 370, "Money: $0", { fontSize: '32px', fill: 'white' });
 
 
 		//does the same for the days
@@ -62,19 +60,28 @@ var StatTraining={
 					this.sudansprite.loadTexture("sudan");
 					break;
 				case 2:
-					this.sudansprite.loadTexture("exercising");
+					this.sudansprite.loadTexture("sudan");
 					break;
 				case 3:
-					this.sudansprite.loadTexture("studying");
+					this.sudansprite.loadTexture("exercising");
 					break;
 				case 4:
-					this.sudansprite.loadTexture("stylin");
+					this.sudansprite.loadTexture("exercising");
 					break;
 				case 5:
-					this.sudansprite.loadTexture("resting");
+					this.sudansprite.loadTexture("studying");
 					break;
 				case 6:
-					this.sudansprite.loadTexture("sudan");
+					this.sudansprite.loadTexture("studying");
+					break;
+				case 7:
+					this.sudansprite.loadTexture("stylin");
+					break;
+				case 8:
+					this.sudansprite.loadTexture("stylin");
+					break;
+				case 9:
+					this.sudansprite.loadTexture("resting");
 					break;
 			}
 			this.nextbutton=game.add.button(1100,350,"nextbutton",this.resetDay,this,"over","out","down");
@@ -82,11 +89,40 @@ var StatTraining={
 			actiontaken=-1;
 		}
 	},
-	actionButtonPressed: function(actiontype){ //starts minigame state if a button is pressed and it hadn't already been pressed
+	actionButtonPressed: function(actiontype){ //starts minigame state if a minigame button is pressed, or simply increments stats
 		console.log("StatTraining: actionButtonPressed");
 		if(actiontaken==0){
 			actiontaken=actiontype;
-			this.state.start("MiniGames");
+			if(actiontaken%2==0){
+				this.state.start("MiniGames");
+			}
+			else{
+				switch(actiontaken){
+					case 1: 
+						charm++;
+						stress++;
+						break;
+					case 3: 
+						fitness++;
+						stress++;
+						break;
+					case 5: 
+						smarts++;
+						stress++;
+						break;
+					case 7: 
+						style++;
+						stress++;
+						break;
+					case 9:
+						stress--;
+						break;
+				}
+				for(var xi=0;xi<this.buttonArray.length;xi++){
+					this.buttonArray[xi].destroy();
+					this.buttontext[xi].destroy();
+				}
+			}
 		}
 	},
 	resetDay: function(){ //resets the state of the game to the beginning of the day
@@ -94,8 +130,10 @@ var StatTraining={
 		day++;
 		this.nextbutton.destroy();
 		actiontaken=0;
-		for(var xi=0;xi<this.buttonArray.length;xi++)
+		for(var xi=0;xi<this.buttonArray.length;xi++){
 			this.buttonArray[xi].destroy();
+			this.buttontext[xi].destroy();
+		}
 		this.setupButtons();
 	},
 	setupButtons: function(){ //generates 4 random buttons out of a possible 8 and displays them on the screen
@@ -122,81 +160,81 @@ var StatTraining={
 					this.buttonArray[xi].scale.setTo(.5,.5);
 					this.buttonArray[xi].anchor.x=.5;
 					this.buttonArray[xi].anchor.y=.5;
-					var buttontext=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Go out for a drink",{ fontSize: '22px', fill: 'white'});
-					buttontext.anchor.x=.5;
-					buttontext.anchor.y=.5;
+					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Go out for a drink",{ fontSize: '22px', fill: 'white'});
+					this.buttontext[xi].anchor.x=.5;
+					this.buttontext[xi].anchor.y=.5;
 					break;
 				case 2:
 					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(2);},this,"over", "out", "down"); 
 					this.buttonArray[xi].scale.setTo(.5,.5);
 					this.buttonArray[xi].anchor.x=.5;
 					this.buttonArray[xi].anchor.y=.5;
-					var buttontext=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Go to a party",{ fontSize: '22px', fill: 'white'});
-					buttontext.anchor.x=.5;
-					buttontext.anchor.y=.5;
+					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Go to a party",{ fontSize: '22px', fill: 'white'});
+					this.buttontext[xi].anchor.x=.5;
+					this.buttontext[xi].anchor.y=.5;
 					break;
 				case 3:
 					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(3);},this,"over", "out", "down"); 
 					this.buttonArray[xi].scale.setTo(.5,.5);
 					this.buttonArray[xi].anchor.x=.5;
 					this.buttonArray[xi].anchor.y=.5;
-					var buttontext=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Do yoga",{ fontSize: '22px', fill: 'white'});
-					buttontext.anchor.x=.5;
-					buttontext.anchor.y=.5;
+					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Do yoga",{ fontSize: '22px', fill: 'white'});
+					this.buttontext[xi].anchor.x=.5;
+					this.buttontext[xi].anchor.y=.5;
 					break;
 				case 4:
 					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(4);},this,"over", "out", "down"); 
 					this.buttonArray[xi].scale.setTo(.5,.5);
 					this.buttonArray[xi].anchor.x=.5;
 					this.buttonArray[xi].anchor.y=.5;
-					var buttontext=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Lift weights",{ fontSize: '22px', fill: 'white'});
-					buttontext.anchor.x=.5;
-					buttontext.anchor.y=.5;
+					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Lift weights",{ fontSize: '22px', fill: 'white'});
+					this.buttontext[xi].anchor.x=.5;
+					this.buttontext[xi].anchor.y=.5;
 					break;
 				case 5:
 					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(5);},this,"over", "out", "down"); 
 					this.buttonArray[xi].scale.setTo(.5,.5);
 					this.buttonArray[xi].anchor.x=.5;
 					this.buttonArray[xi].anchor.y=.5;
-					var buttontext=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Read a book",{ fontSize: '22px', fill: 'white'});
-					buttontext.anchor.x=.5;
-					buttontext.anchor.y=.5;
+					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Read a book",{ fontSize: '22px', fill: 'white'});
+					this.buttontext[xi].anchor.x=.5;
+					this.buttontext[xi].anchor.y=.5;
 					break;
 				case 6:
 					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(6);},this,"over", "out", "down"); 
 					this.buttonArray[xi].scale.setTo(.5,.5);
 					this.buttonArray[xi].anchor.x=.5;
 					this.buttonArray[xi].anchor.y=.5;
-					var buttontext=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Study",{ fontSize: '22px', fill: 'white'});
-					buttontext.anchor.x=.5;
-					buttontext.anchor.y=.5;
+					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Study",{ fontSize: '22px', fill: 'white'});
+					this.buttontext[xi].anchor.x=.5;
+					this.buttontext[xi].anchor.y=.5;
 					break;
 				case 7:
 					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(7);},this,"over", "out", "down"); 
 					this.buttonArray[xi].scale.setTo(.5,.5);
 					this.buttonArray[xi].anchor.x=.5;
 					this.buttonArray[xi].anchor.y=.5;
-					var buttontext=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Try on new clothes",{ fontSize: '22px', fill: 'white'});
-					buttontext.anchor.x=.5;
-					buttontext.anchor.y=.5;
+					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Try on new clothes",{ fontSize: '22px', fill: 'white'});
+					this.buttontext[xi].anchor.x=.5;
+					this.buttontext[xi].anchor.y=.5;
 					break;
 				case 8:
 					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(8);},this,"over", "out", "down"); 
 					this.buttonArray[xi].scale.setTo(.5,.5);
 					this.buttonArray[xi].anchor.x=.5;
 					this.buttonArray[xi].anchor.y=.5;
-					var buttontext=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Manscape",{ fontSize: '22px', fill: 'white'});
-					buttontext.anchor.x=.5;
-					buttontext.anchor.y=.5;
+					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Manscape",{ fontSize: '22px', fill: 'white'});
+					this.buttontext[xi].anchor.x=.5;
+					this.buttontext[xi].anchor.y=.5;
 					break;
 			}
 		}
-		var stressbutton = game.add.button(1150, 500, "buttonsheet", function(){this.actionButtonPressed(5);},this,"over", "out", "down"); 
-		stressbutton.scale.setTo(.5,.5);
-		stressbutton.anchor.x=.5;
-		stressbutton.anchor.y=.5;
-		var stressbuttontext=game.add.text(stressbutton.x,stressbutton.y, "Take a day off",{ fontSize: '22px', fill: 'white'});
-		stressbuttontext.anchor.x=.5;
-		stressbuttontext.anchor.y=.5;
+		this.buttonArray[4] = game.add.button(1150, 500, "buttonsheet", function(){this.actionButtonPressed(9);},this,"over", "out", "down"); 
+		this.buttonArray[4].scale.setTo(.5,.5);
+		this.buttonArray[4].anchor.x=.5;
+		this.buttonArray[4].anchor.y=.5;
+		this.buttontext[4]=game.add.text(this.buttonArray[4].x,this.buttonArray[4].y, "Take a day off",{ fontSize: '22px', fill: 'white'});
+		this.buttontext[4].anchor.x=.5;
+		this.buttontext[4].anchor.y=.5;
 	}
 };
