@@ -6,23 +6,23 @@ var MiniGames={
 		switch(actiontaken){
 			case 2:
 				this.add.text(0, 50,"This button represents the mini\n game that will correspond to the Charm test",{fontSize: "32px", fill: "white" });
-				charm+=2;
-				stress++;
+				player.charm+=2;
+				player.stress++;
 				break;
 			case 4:
 				this.add.text(0, 50,"This button represents the mini\n game that will correspond to the Fitness test",{fontSize: "32px", fill: "white" });
-				fitness+=2;
-				stress++;
+				player.fitness+=2;
+				player.stress++;
 				break;
 			case 6:
 				this.add.text(0, 50,"This button represents the mini\n game that will correspond to the Smarts test",{fontSize: "32px", fill: "white" });
-				smarts+=2;
-				stress++;
+				player.smarts+=2;
+				player.stress++;
 				break;
 			case 8:
 				this.add.text(0, 50,"This button represents the mini\n game that will correspond to the Style test",{fontSize: "32px", fill: "white" });
-				style+=2;
-				stress++;
+				player.style+=2;
+				player.stress++;
 				break;
 		}
 	},

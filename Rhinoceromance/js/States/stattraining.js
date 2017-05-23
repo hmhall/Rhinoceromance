@@ -43,11 +43,11 @@ var StatTraining={
 	},
 	update: function(){
 		this.daytext.text="Day: "+day;
-		this.charmtext.text="Charm: "+charm;
-		this.fitnesstext.text="Fitness: "+fitness;
-		this.smartstext.text="Smarts: "+smarts;
-		this.styletext.text="Style: "+style;
-		this.stresstext.text="Stress: "+stress;
+		this.charmtext.text="Charm: "+player.charm;
+		this.fitnesstext.text="Fitness: "+player.fitness;
+		this.smartstext.text="Smarts: "+player.smarts;
+		this.styletext.text="Style: "+player.style;
+		this.stresstext.text="Stress: "+player.stress;
 
 		if(day==30&&!this.timefordate){ //creates heart button at day 30 exactly once
 			this.timefordate=true;
@@ -99,23 +99,23 @@ var StatTraining={
 			else{
 				switch(actiontaken){
 					case 1: 
-						charm++;
-						stress++;
+						player.charm++;
+						player.stress++;
 						break;
 					case 3: 
-						fitness++;
-						stress++;
+						player.fitness++;
+						player.stress++;
 						break;
 					case 5: 
-						smarts++;
-						stress++;
+						player.smarts++;
+						player.stress++;
 						break;
 					case 7: 
-						style++;
-						stress++;
+						player.style++;
+						player.stress++;
 						break;
 					case 9:
-						stress--;
+						player.stress--;
 						break;
 				}
 				for(var xi=0;xi<this.buttonArray.length;xi++){

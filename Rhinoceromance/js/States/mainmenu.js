@@ -11,7 +11,7 @@ var Mainmenu={
 			y: 500,
 			fontFamily: "blackFont",
 			fontSize: 32,
-			maxWidth: 800,
+			maxWidth: 1080,
 			sound: this.keypress,
 			text: "In this game, you play as the last male northern white rhino. Your goal is to court one of two female rhinos to save your species. Chose activities to perform to raise your stats. As you perform stats, your stress level will rise. To lower stress, chose the rest activity. This is an early build, so some features like minigames, game overs, and the date are not yet included..."
 		});

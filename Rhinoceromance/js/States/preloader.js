@@ -20,7 +20,7 @@ var Preloader={
 		this.load.image("stylin","img/stylin.png");
 		this.load.image("cannery", "img/cannery.png");
 
-		this.load.audio("keypress", "audio/key.wav");
+		this.load.audio("keypress", "audio/keystroke.ogg");
 
 		this.load.bitmapFont('blackFont','font/black.png', 'font/black.fnt');
 
