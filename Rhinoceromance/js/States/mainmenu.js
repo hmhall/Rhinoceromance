@@ -3,7 +3,7 @@ var Mainmenu={
 	create: function(){ //creates everything needed for main menu
 		console.log('Mainmenu: create');
 		this.stage.backgroundColor = "#CEF6F5";
-		this.keypress = game.add.audio('keypress');
+		this.keypress = game.add.audio('keypress'); 
 
 		var titletY = new Typewriter();
 		titletY.init(Mainmenu, {
@@ -17,7 +17,7 @@ var Mainmenu={
 		});
 		titletY.start();
 
-		this.add.text(game.world.width/4, 50, "Rhinoceromance", {fontSize: "64px", fill: "black"})
+		this.add.text(game.world.width/4, 50,"Rhinoceromance",{fontSize: "64px", fill: "white" });
 
 		var startbutton = game.add.button(game.world.width/4 + 50, 200, "buttonsheet", this.start, this, "over", "out", "down"); //add button
 		this.add.text(game.world.width/4 + 75, 260,"Click the button to start",{fontSize: "32px", fill: "white" });
