@@ -42,10 +42,14 @@ var StatTraining={
 		
 
 		this.timefordate=false;
+		this.stressBar = new Bar (this.game);
+
+		
+
 
 	},
 	update: function(){
-		
+		this.stressBar.setPercent(100-player.stress*10/3);
 		
 		this.daytext.text="Day: "+day;
 		this.charmtext.text="Charm: "+player.charm;
