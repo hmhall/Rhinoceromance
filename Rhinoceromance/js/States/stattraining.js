@@ -2,10 +2,10 @@
 var StatTraining={
 	create: function(){ //creates everything needed for the current state
 
-		//var pentas = new drawStats();
+		//let pentas = new drawStats();
 		console.log("StatTraining: create");
 
-		var apartmentbg=game.add.sprite(0,0,"apartment");
+		let apartmentbg=game.add.sprite(0,0,"apartment");
 		apartmentbg.scale.setTo(.79,.79);
 
 		this.sudansprite = game.add.sprite(game.world.width/2,game.world.height/2+100,"base");
@@ -23,7 +23,7 @@ var StatTraining={
 
 		
 		//sets up a graphic to display the stats, and displays them
-		var statwindow = game.add.sprite(20,100,"statwindow");
+		let statwindow = game.add.sprite(20,100,"statwindow");
 		statwindow.scale.setTo(.75,.75);
 		this.charmtext=game.add.text(35, 120, "Charm: 10", { fontSize: '32px', fill: 'white' });
 		this.fitnesstext=game.add.text(35, 170, "Fitness: 10", { fontSize: '32px', fill: 'white' });
@@ -33,7 +33,7 @@ var StatTraining={
 
 
 		//does the same for the days
-		var daywindow=game.add.sprite(125,50,"daytimer");
+		let daywindow=game.add.sprite(125,50,"daytimer");
 		daywindow.anchor.x=.5;
 		daywindow.anchor.y=.5;
 		this.daytext=game.add.text(daywindow.x, daywindow.y, "Day 0", { fontSize: '32px', fill: 'white' });
@@ -49,7 +49,7 @@ var StatTraining={
 
 	},
 	update: function(){
-		this.stressBar.setPercent(100-player.stress*10/3);
+		this.stressBar.setPercent(100-player.stress*10);
 		
 		this.daytext.text="Day: "+day;
 		this.charmtext.text="Charm: "+player.charm;
@@ -62,6 +62,7 @@ var StatTraining={
 			this.timefordate=true;
 			this.datebutton=game.add.button(700,600,"heart",function(){this.state.start("DateNight");},this); //when clicked, moves to DateNight
 			this.datebutton.scale.setTo(.075,.075);
+
 		}
 		if(actiontaken>0){
 			switch(actiontaken){
@@ -105,6 +106,7 @@ var StatTraining={
 			this.nextbutton=game.add.button(1100,350,"nextbutton",this.resetDay,this,"over","out","down");
 			this.nextbutton.scale.setTo(.75,.75);
 			actiontaken=-1;
+			if (player.stress > 9|player.stress <0) this.state.start("Gameover");
 		}
 	},
 	actionButtonPressed: function(actiontype){ //starts minigame state if a minigame button is pressed, or simply increments stats
@@ -136,7 +138,7 @@ var StatTraining={
 						player.stress--;
 						break;
 				}
-				for(var xi=0;xi<this.buttonArray.length;xi++){
+				for(let xi=0;xi<this.buttonArray.length;xi++){
 					this.buttonArray[xi].destroy();
 					this.buttontext[xi].destroy();
 				}
@@ -148,21 +150,21 @@ var StatTraining={
 		day++;
 		this.nextbutton.destroy();
 		actiontaken=0;
-		for(var xi=0;xi<this.buttonArray.length;xi++){
+		for(let xi=0;xi<this.buttonArray.length;xi++){
 			this.buttonArray[xi].destroy();
 			this.buttontext[xi].destroy();
 		}
 		this.setupButtons();
 	},
 	setupButtons: function(){ //generates 4 random buttons out of a possible 8 and displays them on the screen
-		var currbutton;
-		var actionoptions=[];
-		var keeplooping=true;
-		for (var xi=0; xi < 4; xi++) { //generates a random number then checks if it's already in the actionoptions array. If not, adds it to the array. If so, generates another and repeats
+		let currbutton;
+		let actionoptions=[];
+		let keeplooping=true;
+		for (let xi=0; xi < 4; xi++) { //generates a random number then checks if it's already in the actionoptions array. If not, adds it to the array. If so, generates another and repeats
 			while(keeplooping){
 				keeplooping=false;
 				currbutton=Math.floor((Math.random()*8)+1);
-				for (var zi=0; zi < actionoptions.length; zi++) {
+				for (let zi=0; zi < actionoptions.length; zi++) {
 					if(actionoptions[zi]==currbutton)
 						keeplooping=true;
 				}
@@ -171,7 +173,7 @@ var StatTraining={
 			keeplooping=true;
 		}
 		actionoptions.sort(function(a,b){return a-b}); //sorts array in ascending order
-		for (var xi=0; xi < 4; xi++) { //generates buttons
+		for (let xi=0; xi < 4; xi++) { //generates buttons
 			switch(actionoptions[xi]){
 				case 1:
 					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(1);},this,"over", "out", "down"); 
