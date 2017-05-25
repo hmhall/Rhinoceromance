@@ -24,6 +24,7 @@ var Mainmenu={
 	},
 	start: function(){ //changes state when the button is pressed
 		console.log('Mainmenu: start');
+
 		this.keypress.stop();
 		this.state.start("StatTraining");
 

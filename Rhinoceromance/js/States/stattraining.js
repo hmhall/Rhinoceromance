@@ -1,7 +1,10 @@
 //Mistakes into Miracles
 var StatTraining={
 	create: function(){ //creates everything needed for the current state
+
+		//var pentas = new drawStats();
 		console.log("StatTraining: create");
+
 		var apartmentbg=game.add.sprite(0,0,"apartment");
 		apartmentbg.scale.setTo(.79,.79);
 
@@ -42,6 +45,8 @@ var StatTraining={
 
 	},
 	update: function(){
+		
+		
 		this.daytext.text="Day: "+day;
 		this.charmtext.text="Charm: "+player.charm;
 		this.fitnesstext.text="Fitness: "+player.fitness;
@@ -58,30 +63,39 @@ var StatTraining={
 			switch(actiontaken){
 				case 1:
 					this.sudansprite.loadTexture("sudan");
+
 					break;
 				case 2:
 					this.sudansprite.loadTexture("sudan");
+
 					break;
 				case 3:
 					this.sudansprite.loadTexture("exercising");
+
 					break;
 				case 4:
 					this.sudansprite.loadTexture("exercising");
+
 					break;
 				case 5:
 					this.sudansprite.loadTexture("studying");
+
 					break;
 				case 6:
 					this.sudansprite.loadTexture("studying");
+
 					break;
 				case 7:
 					this.sudansprite.loadTexture("stylin");
+
 					break;
 				case 8:
 					this.sudansprite.loadTexture("stylin");
+
 					break;
 				case 9:
 					this.sudansprite.loadTexture("resting");
+
 					break;
 			}
 			this.nextbutton=game.add.button(1100,350,"nextbutton",this.resetDay,this,"over","out","down");
