@@ -6,15 +6,15 @@ var Mainmenu={
 		this.keypress = game.add.audio('keypress'); 
 
 		var titletY = new Typewriter();
-		titletY.init(Mainmenu, {
+		titletY.init(game, {
 			x: 100,
 			y: 500,
 			fontFamily: "blackFont",
 			fontSize: 32,
-			maxWidth: 800,
+			maxWidth: 1080,
 			sound: this.keypress,
-			dialogues: ["In this game, you play as the last male northern white rhino.", "Your goal is to court one of two female rhinos to save your species.", "Chose activities to perform to raise your stats. As you perform stats, your stress level will rise. To lower stress, chose the rest activity. This is an early build, so some features like minigames, game overs, and the date are not yet included..."],
-			dialogueEndFn: this.changeState
+			//endFn: console.log('ooo'),
+			dialogues: ["In this game, you play as the last male northern white rhino.", "Your goal is to court one of two female rhinos to save your species.", "Chose activities to perform to raise your stats. As you perform stats, your stress level will rise. To lower stress, chose the rest activity. This is an early build, so some features like minigames, game overs, and the date are not yet included..."]
 		});
 		titletY.start();
 		//titletY.destroy();
@@ -26,10 +26,9 @@ var Mainmenu={
 	start: function(){ //changes state when the button is pressed
 		console.log('Mainmenu: start');
 
-		//this.keypress.stop();
-		//this.state.start("StatTraining");
-	},
-	changeState: function(){
-		game.state.start("StatTraining");
-	}	
+		this.state.start("StatTraining");
+
+		
+
+	}
 };

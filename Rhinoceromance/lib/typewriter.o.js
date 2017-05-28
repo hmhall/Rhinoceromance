@@ -1,9 +1,15 @@
+var mouseclickcounts = 0
+document.onclick = function() {
+	mouseclickcounts++;
+	//console.log(mouseclickcounts);
+}
 function Typewriter() {
     this.typedText;
     this.timer;
     this.pickedQuote;
     var _that = this;
     var game;
+	var nextDialogue = true;
 	var skipDialogue = false;
 	function MouseEventAction(event) {
 		if(event.clientX > _that.x && event.clientY > _that.y && event.clientX < (_that.x +  _that.maxWidth) && event.clientY < (_that.y +  _that.maxWidth/4.0)){
@@ -13,7 +19,8 @@ function Typewriter() {
             }
         }
 		
-			if(_that.currentLetter >= _that.typedText.children.length){
+			nextDialogue = !nextDialogue;
+			if(nextDialogue){
 				skipDialogue = false;
 				_that.typedText.destroy();
 				_that.dialogues.shift();
@@ -21,12 +28,7 @@ function Typewriter() {
 				if(_that.dialogues.length !== 0){
 					_that.text = _that.dialogues[0];
 					start();
-				}
-				else{
-				    skipDialogue = false;
-					var nextButton = game.add.button(game.world.width - 350, game.world.height - 250, "nextbutton", _that.dialogueEndFn, this, "over", "out", "down"); //add button
-					document.removeEventListener("click", MouseEventAction);
-				}
+				}				
 			}
 			else{
 				skipDialogue = true;
@@ -36,12 +38,11 @@ function Typewriter() {
 	document.addEventListener("click", MouseEventAction);
     function init(gameInstance, options) {
         game = gameInstance;
-        _that.time = options.time || Phaser.Timer.SECOND / 10;
+        _that.time = options.time || Phaser.Timer.SECOND / 30;
         _that.sound = options.sound || null;
         _that.soundMarker = options.soundMarker || null;
         _that.writerFn = options.writerFn || null;
         _that.endFn = options.endFn || null;
-		_that.dialogueEndFn = options.dialogueEndFn || null;
         _that.times = options.times || 10;
 		_that.dialogues = options.dialogues || [""];
         _that.text = _that.dialogues[0];
@@ -96,12 +97,12 @@ function Typewriter() {
         _that.typedText.x = x;
         _that.typedText.y = y;
         if (_that.endFn !== null) {
-            countdown(typeWriter, length, _that.endFn);
+        	countdown(typeWriter, length, _that.endFn);
         } else {
             countdown(typeWriter, length);
         }
     }
-	
+
     /**
      * [countDown description]
      * @param  {Function} fn    [description]
@@ -116,9 +117,10 @@ function Typewriter() {
             if (_that.sound !== null) {
                 _that.sound.stop();
             }
+			
         };
-		//if(_that.dialogues && _that.dialogues.length === 1)
-			_timer.onComplete.add(endFn);
+      
+        _timer.onComplete.add(endFn);
         _timer.repeat(_that.time, times, fn, this);
         _that.timer = _timer;
     }
@@ -142,6 +144,7 @@ function Typewriter() {
 				_that.currentLetter++;
 			}
 			stop();
+			console.log('ooo');
 		}
     }
 
