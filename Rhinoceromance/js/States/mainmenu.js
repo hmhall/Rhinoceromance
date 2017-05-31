@@ -28,8 +28,6 @@ var Mainmenu={
 
 		this.keypress.stop();
 		this.state.start("StatTraining");
-
-		
-
 	}
 };
+
