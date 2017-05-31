@@ -21,5 +21,6 @@ var Gameover={
 		player.topic = false;
 		day=1;
 		actiontaken=0;
+		
 	}
 };
