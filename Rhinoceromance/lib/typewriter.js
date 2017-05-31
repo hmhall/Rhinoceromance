@@ -24,7 +24,8 @@ function Typewriter() {
 				}
 				else{
 				    skipDialogue = false;
-					var nextButton = game.add.button(game.world.width - 350, game.world.height - 250, "nextbutton", _that.dialogueEndFn, this, "over", "out", "down"); //add button
+				    _that.dialogueEndFn();
+					//var nextButton = game.add.button(game.world.width - 350, game.world.height - 250, "nextbutton", _that.dialogueEndFn, this, "over", "out", "down"); //add button
 					document.removeEventListener("click", MouseEventAction);
 				}
 			}
