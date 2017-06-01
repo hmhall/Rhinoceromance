@@ -1,8 +1,8 @@
 //Mistakes into Miracles
 var Boot={
-	boot: function(){
+	preload: function(){
 		console.log('Boot: boot');
-		game.load.image('loading', 'assets/img/loading.png');
+		this.load.image('loading', 'assets/img/loading.png');
 	},
 	create: function() {
 		console.log('Boot: create');
