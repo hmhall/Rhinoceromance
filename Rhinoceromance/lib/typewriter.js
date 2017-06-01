@@ -4,7 +4,37 @@ function Typewriter() {
     this.pickedQuote;
     var _that = this;
     var game;
-
+	var skipDialogue = false;
+	function MouseEventAction(event) {
+		if(event.clientX > _that.x && event.clientY > _that.y && event.clientX < (_that.x +  _that.maxWidth) && event.clientY < (_that.y +  _that.maxWidth/4.0)){
+		if (_that.sound !== null) {
+            if (_that.sound.isPlaying === true) {
+                _that.sound.stop();
+            }
+        }
+		
+			if(_that.currentLetter >= _that.typedText.children.length){
+				skipDialogue = false;
+				_that.typedText.destroy();
+				_that.dialogues.shift();
+				
+				if(_that.dialogues.length !== 0){
+					_that.text = _that.dialogues[0];
+					start();
+				}
+				else{
+				    skipDialogue = false;
+				    _that.dialogueEndFn();
+					//var nextButton = game.add.button(game.world.width - 350, game.world.height - 250, "nextbutton", _that.dialogueEndFn, this, "over", "out", "down"); //add button
+					document.removeEventListener("click", MouseEventAction);
+				}
+			}
+			else{
+				skipDialogue = true;
+			}
+		}		
+	}
+	document.addEventListener("click", MouseEventAction);
     function init(gameInstance, options) {
         game = gameInstance;
         _that.time = options.time || Phaser.Timer.SECOND / 50;
@@ -12,10 +42,12 @@ function Typewriter() {
         _that.soundMarker = options.soundMarker || null;
         _that.writerFn = options.writerFn || null;
         _that.endFn = options.endFn || null;
+		_that.dialogueEndFn = options.dialogueEndFn || null;
         _that.times = options.times || 10;
-        _that.text = options.text || "";
+		_that.dialogues = options.dialogues || [""];
+        _that.text = _that.dialogues[0];
         _that.x = options.x || 100;
-        _that.y = options.y || 600;
+        _that.y = options.y || 500;
         _that.maxWidth = options.maxWidth || 200;
         _that.fontFamily = options.fontFamily || "blackFont";
         _that.fontSize = options.fontSize || 32;
@@ -70,7 +102,7 @@ function Typewriter() {
             countdown(typeWriter, length);
         }
     }
-
+	
     /**
      * [countDown description]
      * @param  {Function} fn    [description]
@@ -86,20 +118,32 @@ function Typewriter() {
                 _that.sound.stop();
             }
         };
-        _timer.onComplete.add(endFn);
+		//if(_that.dialogues && _that.dialogues.length === 1)
+			_timer.onComplete.add(endFn);
         _timer.repeat(_that.time, times, fn, this);
         _that.timer = _timer;
     }
 
-    function typeWriter(text) {
-        if (_that.sound !== null) {
-            if (_that.sound.isPlaying === false) {
-                _that.sound.play();
-            }
-        }
-        var letter = _that.typedText.getChildAt(_that.currentLetter);
-        letter.alpha = 1;
-        _that.currentLetter++;
+	function typeWriter(text) {
+        if(!skipDialogue){
+			if (_that.sound !== null) {
+				if (_that.sound.isPlaying === false) {
+					_that.sound.play();
+				}
+			}
+			var letter = _that.typedText.getChildAt(_that.currentLetter);
+			letter.alpha = 1;
+			_that.currentLetter++;
+		}
+		else{
+			
+			for (index = 0; index < _that.typedText.children.length; ++index) {
+				var letter = _that.typedText.getChildAt(index);
+				letter.alpha = 1;
+				_that.currentLetter++;
+			}
+			stop();
+		}
     }
 
     return {
