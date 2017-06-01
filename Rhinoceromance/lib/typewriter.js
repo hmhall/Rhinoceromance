@@ -7,7 +7,7 @@ function Typewriter() {
 
     function init(gameInstance, options) {
         game = gameInstance;
-        _that.time = options.time || Phaser.Timer.SECOND / 10;
+        _that.time = options.time || Phaser.Timer.SECOND / 50;
         _that.sound = options.sound || null;
         _that.soundMarker = options.soundMarker || null;
         _that.writerFn = options.writerFn || null;
