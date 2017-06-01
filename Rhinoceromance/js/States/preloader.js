@@ -5,7 +5,7 @@ var Preloader={
 
 		var loadingBar = this.add.sprite(game.width/2, game.height/2, 'loading');
 		loadingBar.anchor.set(0.5);
-		game.preload.setPreloadSprite(loadingBar);
+		game.load.setPreloadSprite(loadingBar);
 
 		this.load.path = 'assets/';
 		
@@ -14,7 +14,7 @@ var Preloader={
 		this.load.image("bg","img/bg.png");
 		this.load.image("sudan","img/sudan.png");
 		this.load.image("fatu","img/fatu.png");
-		this.load.image("fatuangery","img/fatuangery.png");
+		this.load.image("fatuangry","img/fatuangry.png");
 		this.load.image("fatubashful","img/fatubashful.png");
 		this.load.image("fatucharmedcg","img/fatucharmedcg.png");
 		this.load.image("fatudisappoint","img/fatudisappoint.png");
