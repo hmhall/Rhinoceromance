@@ -1,6 +1,7 @@
 //Mistakes into Miracles
 var StatTraining={
 	create: function(){ //creates everything needed for the current state
+		
 
 		//let pentas = new drawStats();
 		console.log("StatTraining: create");
@@ -44,7 +45,10 @@ var StatTraining={
 		this.timefordate=false;
 		this.stressBar = new Bar (this.game);
 
-		
+		//daily
+		let fortuneButton = this.add.button(950,50,"buttonsheet",this.showFortune,this,"miniover","miniout","minidown");
+		fortuneButton.scale.setTo(.3);
+		fortuneButton.anchor.set(0.5);
 
 
 	},
@@ -108,6 +112,9 @@ var StatTraining={
 			actiontaken=-1;
 			if (player.stress > 9|player.stress <0) this.state.start("Gameover");
 		}
+	},
+	showFortune: function() {
+		console.log("fortune");
 	},
 	actionButtonPressed: function(actiontype){ //starts minigame state if a minigame button is pressed, or simply increments stats
 		console.log("StatTraining: actionButtonPressed");
