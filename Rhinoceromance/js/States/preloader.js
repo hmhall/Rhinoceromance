@@ -31,6 +31,11 @@ var Preloader={
 		this.load.image("stylin","img/stylin.png");
 		this.load.image("cannery", "img/cannery.png");
 		this.load.image("concert", "img/concert.png");
+		this.load.image("charm","img/charm.png");
+		this.load.image("style","img/style.png");
+		this.load.image("smarts","img/smarts.png");
+		this.load.image("fitness","img/fitness.png");
+		this.load.image("mask","img/mask.png");
 
 		this.load.audio("keypress", "audio/keystroke.ogg");
 

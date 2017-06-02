@@ -45,11 +45,19 @@ var StatTraining={
 		this.timefordate=false;
 		this.stressBar = new Bar (this.game);
 
+
 		//daily
-		let fortuneButton = this.add.button(950,50,"buttonsheet",this.showFortune,this,"miniover","miniout","minidown");
+		buttonGroup = game.add.group();
+
+		let fortuneButton = this.add.button(950,50,"buttonsheet",this.toggleFortune,this,"miniover","miniout","minidown");
 		fortuneButton.scale.setTo(.3);
 		fortuneButton.anchor.set(0.5);
 
+		let fortuneGroup = game.add.group();
+		//let fMask = game.add.image(1011.2,0,"mask");
+		//fortuneGroup.add();
+		//this.buttonGroup.inputEnabled = false;
+		
 
 	},
 	update: function(){
@@ -113,8 +121,17 @@ var StatTraining={
 			if (player.stress > 9|player.stress <0) this.state.start("Gameover");
 		}
 	},
-	showFortune: function() {
-		console.log("fortune");
+	toggleFortune: function() {
+		console.log(fortuneShow);
+	if (!fortuneShow){
+		console.log("tween");
+		
+	}else{
+		console.log("destroying");
+
+	};
+		//let fortuneTab = this.game 
+		fortuneShow = !fortuneShow;
 	},
 	actionButtonPressed: function(actiontype){ //starts minigame state if a minigame button is pressed, or simply increments stats
 		console.log("StatTraining: actionButtonPressed");
@@ -181,6 +198,7 @@ var StatTraining={
 		}
 		actionoptions.sort(function(a,b){return a-b}); //sorts array in ascending order
 		for (let xi=0; xi < 4; xi++) { //generates buttons
+
 			switch(actionoptions[xi]){
 				case 1:
 					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(1);},this,"over", "out", "down"); 
@@ -265,3 +283,5 @@ var StatTraining={
 		this.buttontext[4].anchor.y=.5;
 	}
 };
+		var fortuneShow = false;
+		var buttonGroup;
