@@ -55,11 +55,14 @@ var StatTraining={
 
 		
 
-		//this.buttonGroup.inputEnabled = false;
-		
+		//this.		
 
 	},
 	update: function(){
+		modCharm=fortune[day][0];
+		modFitness=fortune[day][1];
+		modSmarts=fortune[day][2];
+		modStyle= fortune[day][3];
 		this.stressBar.setPercent(100-player.stress*10);
 		
 		this.daytext.text="Day: "+day;
@@ -173,19 +176,19 @@ var StatTraining={
 			else{
 				switch(actiontaken){
 					case 1: 
-						player.charm++;
+						player.charm+=modCharm;
 						player.stress++;
 						break;
 					case 3: 
-						player.fitness++;
+						player.fitness+=modFitness;
 						player.stress++;
 						break;
 					case 5: 
-						player.smarts++;
+						player.smarts+=modSmarts;
 						player.stress++;
 						break;
 					case 7: 
-						player.style++;
+						player.style+=modStyle;
 						player.stress++;
 						break;
 					case 9:
@@ -211,7 +214,6 @@ var StatTraining={
 		this.setupButtons();
 	},
 	setupButtons: function(){ //generates 4 random buttons out of a possible 8 and displays them on the screen
-		buttonGroup = game.add.group();
 		let currbutton;
 		let actionoptions=[];
 		let keeplooping=true;
@@ -312,6 +314,7 @@ var StatTraining={
 		this.buttontext[4]=game.add.text(this.buttonArray[4].x,this.buttonArray[4].y, "Take a day off",{ fontSize: '22px', fill: 'white'});
 		this.buttontext[4].anchor.x=.5;
 		this.buttontext[4].anchor.y=.5;
+
 	}
 };
 		var fortuneShow = false;
