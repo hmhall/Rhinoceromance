@@ -59,10 +59,8 @@ var StatTraining={
 
 	},
 	update: function(){
-		modCharm=fortune[day][0];
-		modFitness=fortune[day][1];
-		modSmarts=fortune[day][2];
-		modStyle= fortune[day][3];
+
+
 		this.stressBar.setPercent(100-player.stress*10);
 		
 		this.daytext.text="Day: "+day;
@@ -168,6 +166,10 @@ var StatTraining={
 	},
 	actionButtonPressed: function(actiontype){ //starts minigame state if a minigame button is pressed, or simply increments stats
 		console.log("StatTraining: actionButtonPressed");
+		modCharm=fortune[day][0];
+		modFitness=fortune[day][1];
+		modSmarts=fortune[day][2];
+		modStyle= fortune[day][3];
 		if(actiontaken==0){
 			actiontaken=actiontype;
 			if(actiontaken%2==0){
