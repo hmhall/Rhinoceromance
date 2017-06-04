@@ -13,16 +13,4 @@ game.state.add("Gameover",Gameover);
 game.state.start("Boot");
 
 
-var day=1;
-var player = {};
-player.charm=10;
-player.fitness=10;
-player.smarts=10;
-player.style=10;
-player.stress=0;
-player.arrive = false;
-player.order = false;
-player.etiquette = false;
-player.topic = false;
-
-var actiontaken=0;
+newGame();

@@ -30,7 +30,7 @@ var StatTraining={
 		this.fitnesstext=game.add.text(35, 170, "Fitness: 10", { fontSize: '32px', fill: 'white' });
 		this.smartstext=game.add.text(35, 220, "Smarts: 10", { fontSize: '32px', fill: 'white' });
 		this.styletext=game.add.text(35, 270, "Style: 10", { fontSize: '32px', fill: 'white' });
-		this.stresstext=game.add.text(35, 320, "Stress: 0", { fontSize: '32px', fill: 'white' });
+		//this.stresstext=game.add.text(35, 320, "Stress: 0", { fontSize: '32px', fill: 'white' });
 
 
 		//does the same for the days
@@ -53,9 +53,8 @@ var StatTraining={
 		fortuneButton.scale.setTo(.3);
 		fortuneButton.anchor.set(0.5);
 
-		let fortuneGroup = game.add.group();
-		//let fMask = game.add.image(1011.2,0,"mask");
-		//fortuneGroup.add();
+		
+
 		//this.buttonGroup.inputEnabled = false;
 		
 
@@ -68,7 +67,7 @@ var StatTraining={
 		this.fitnesstext.text="Fitness: "+player.fitness;
 		this.smartstext.text="Smarts: "+player.smarts;
 		this.styletext.text="Style: "+player.style;
-		this.stresstext.text="Stress: "+player.stress;
+		//this.stresstext.text="Stress: "+player.stress;
 
 		if(day==30&&!this.timefordate){ //creates heart button at day 30 exactly once
 			this.timefordate=true;
@@ -125,10 +124,35 @@ var StatTraining={
 		console.log(fortuneShow);
 	if (!fortuneShow){
 		console.log("tween");
-		
+		fortuneGroup = game.add.group();
+		fMask = game.add.image(1011.2,0,"mask");
+		fortuneGroup.add(fMask);
+		let ySpacing = 128;
+		let xSpacing = 72;
+		let fortuneX = 1020;
+		let fortuneY = 100;
+		for (fDay=day;fDay<day+3;fDay++){
+			for (stat=0;stat<4;stat++){
+				
+				switch(fortune[fDay][stat]){
+				case -1:
+				let luckn=game.add.sprite(fortuneX,fortuneY,"luckn");fortuneGroup.add(luckn);break;
+				case 0:
+				let luck0=game.add.sprite(fortuneX,fortuneY,"luck0");fortuneGroup.add(luck0);break;
+				case 1:
+				let luck1=game.add.sprite(fortuneX,fortuneY,"luck1");fortuneGroup.add(luck1);break;
+				case 2:
+				let luck2=game.add.sprite(fortuneX,fortuneY,"luck2");fortuneGroup.add(luck2);break;
+				}
+				fortuneY+=ySpacing; 
+			}
+			fortuneY=100;
+			fortuneX+=xSpacing;
+
+		}
 	}else{
 		console.log("destroying");
-
+		fortuneGroup.destroy();
 	};
 		//let fortuneTab = this.game 
 		fortuneShow = !fortuneShow;

@@ -9,18 +9,7 @@ var Gameover={
 	restart: function(){  //returns to main menu
 		console.log("Gameover: restart");
 		game.state.start("Mainmenu");
-		player = {};
-		player.charm=10;
-		player.fitness=10;
-		player.smarts=10;
-		player.style=10;
-		player.stress=0;
-		player.arrive = false;
-		player.order = false;
-		player.etiquette = false;
-		player.topic = false;
-		day=1;
-		actiontaken=0;
+		newGame();
 		
 	}
 };

@@ -37,6 +37,11 @@ var Preloader={
 		this.load.image("fitness","img/fitness.png");
 		this.load.image("mask","img/mask.png");
 
+		this.load.image("luckn","img/luckn.png");
+		this.load.image("luck0","img/luck0.png");
+		this.load.image("luck1","img/luck1.png");
+		this.load.image("luck2","img/luck2.png");
+
 		this.load.audio("keypress", "audio/keystroke.ogg");
 
 		this.load.bitmapFont('blackFont','font/black.png', 'font/black.fnt');
