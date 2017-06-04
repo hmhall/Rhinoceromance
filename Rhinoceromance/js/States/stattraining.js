@@ -47,7 +47,7 @@ var StatTraining={
 
 
 		//daily
-		buttonGroup = game.add.group();
+		
 
 		let fortuneButton = this.add.button(950,50,"buttonsheet",this.toggleFortune,this,"miniover","miniout","minidown");
 		fortuneButton.scale.setTo(.3);
@@ -124,12 +124,14 @@ var StatTraining={
 		console.log(fortuneShow);
 	if (!fortuneShow){
 		console.log("tween");
+		for (xB=0;xB<this.buttonArray.length;xB++) this.buttonArray[xB].inputEnabled = false;
+		
 		fortuneGroup = game.add.group();
 		fMask = game.add.image(1011.2,0,"mask");
 		fortuneGroup.add(fMask);
 		let ySpacing = 128;
 		let xSpacing = 72;
-		let fortuneX = 1020;
+		let fortuneX = 1050;
 		let fortuneY = 100;
 		for (fDay=day;fDay<day+3;fDay++){
 			for (stat=0;stat<4;stat++){
@@ -150,9 +152,13 @@ var StatTraining={
 			fortuneX+=xSpacing;
 
 		}
+		fortuneGroup.scale.set(1.5,1.5)
+		game.add.tween(fortuneGroup.scale).to( {x: 1, y: 1}, 500, Phaser.Easing.Back.InOut, true, 0, 0).yoyo(false);
 	}else{
 		console.log("destroying");
 		fortuneGroup.destroy();
+		
+		for (xB=0;xB<this.buttonArray.length;xB++) this.buttonArray[xB].inputEnabled = true;
 	};
 		//let fortuneTab = this.game 
 		fortuneShow = !fortuneShow;
@@ -205,6 +211,7 @@ var StatTraining={
 		this.setupButtons();
 	},
 	setupButtons: function(){ //generates 4 random buttons out of a possible 8 and displays them on the screen
+		buttonGroup = game.add.group();
 		let currbutton;
 		let actionoptions=[];
 		let keeplooping=true;
@@ -308,4 +315,3 @@ var StatTraining={
 	}
 };
 		var fortuneShow = false;
-		var buttonGroup;
