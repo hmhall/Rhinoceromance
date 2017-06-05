@@ -1,8 +1,6 @@
 //Mistakes into Miracles
 var StatTraining={
 	create: function(){ //creates everything needed for the current state
-		
-
 		//let pentas = new drawStats();
 		console.log("StatTraining: create");
 
@@ -59,8 +57,7 @@ var StatTraining={
 
 	},
 	update: function(){
-
-
+		
 		this.stressBar.setPercent(100-player.stress*10);
 		
 		this.daytext.text="Day: "+day;
@@ -130,14 +127,14 @@ var StatTraining={
 		fortuneGroup = game.add.group();
 		fMask = game.add.image(1011.2,0,"mask");
 		fortuneGroup.add(fMask);
-		let ySpacing = 128;
-		let xSpacing = 72;
-		let fortuneX = 1050;
-		let fortuneY = 100;
+		let ySpacing = 75;
+		let xSpacing = 60;
+		let fortuneX = 1111.2;
+		let fortuneY = 420;
 		for (fDay=day;fDay<day+3;fDay++){
 			for (stat=0;stat<4;stat++){
 				
-				switch(fortune[fDay][stat]){
+				switch(fortune[fDay][stat][0]){
 				case -1:
 				let luckn=game.add.sprite(fortuneX,fortuneY,"luckn");fortuneGroup.add(luckn);break;
 				case 0:
@@ -149,7 +146,7 @@ var StatTraining={
 				}
 				fortuneY+=ySpacing; 
 			}
-			fortuneY=100;
+			fortuneY=420;
 			fortuneX+=xSpacing;
 
 		}
@@ -166,10 +163,7 @@ var StatTraining={
 	},
 	actionButtonPressed: function(actiontype){ //starts minigame state if a minigame button is pressed, or simply increments stats
 		console.log("StatTraining: actionButtonPressed");
-		modCharm=fortune[day][0];
-		modFitness=fortune[day][1];
-		modSmarts=fortune[day][2];
-		modStyle= fortune[day][3];
+
 		if(actiontaken==0){
 			actiontaken=actiontype;
 			if(actiontaken%2==0){
@@ -179,19 +173,19 @@ var StatTraining={
 				switch(actiontaken){
 					case 1: 
 						player.charm+=modCharm;
-						player.stress++;
+						player.stress+=stressCharm;
 						break;
 					case 3: 
 						player.fitness+=modFitness;
-						player.stress++;
+						player.stress+=stressFitness;
 						break;
 					case 5: 
 						player.smarts+=modSmarts;
-						player.stress++;
+						player.stress+=stressSmarts;
 						break;
 					case 7: 
 						player.style+=modStyle;
-						player.stress++;
+						player.stress+=stressStyle;
 						break;
 					case 9:
 						player.stress--;
@@ -216,6 +210,16 @@ var StatTraining={
 		this.setupButtons();
 	},
 	setupButtons: function(){ //generates 4 random buttons out of a possible 8 and displays them on the screen
+
+		modCharm=fortune[day][0][1];
+		modFitness=fortune[day][1][1];
+		modSmarts=fortune[day][2][1];
+		modStyle= fortune[day][3][1];
+		stressCharm=fortune[day][0][2];
+		stressFitness=fortune[day][1][2];
+		stressSmarts=fortune[day][2][2];
+		stressStyle= fortune[day][3][2];
+
 		let currbutton;
 		let actionoptions=[];
 		let keeplooping=true;
