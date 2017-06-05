@@ -2,7 +2,7 @@ function newGame(){
 // reset day
 	day = 0;
 // generate fortune for the round
-	nMax = 30;
+	nMax = 33;
 	fortune = new Array();
 	for (let nDay=0; nDay<nMax;nDay++){
 		fortune[nDay] = new Array();
@@ -11,7 +11,6 @@ function newGame(){
 			fortune[nDay][stat][0] = Math.floor((Math.random()*4)-1); 		
 		}
 	}
-
 // assign the rest of arrays according to fortune
 	for (tempDay=0; tempDay<fortune.length;tempDay++){
 		for(tempStat=0; tempStat<fortune[tempDay].length;tempStat++){
@@ -34,10 +33,7 @@ function newGame(){
 				break;
 			}
 		}
-
 	}
-
-
 // reset player stats
 	player = {};
 	player.charm=10;
@@ -49,7 +45,5 @@ function newGame(){
 	player.order = false;
 	player.etiquette = false;
 	player.topic = false;
-
 	actiontaken=0;
-
 }

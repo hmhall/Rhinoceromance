@@ -1,6 +1,5 @@
 // Mistakes into Miracles
 //initialize game
-
 var game = new Phaser.Game(1280, 720, Phaser.AUTO);
 //add states
 game.state.add("Boot", Boot);
@@ -11,6 +10,5 @@ game.state.add("MiniGames",MiniGames);
 game.state.add("DateNight", DateNight);
 game.state.add("Gameover",Gameover);
 game.state.start("Boot");
-
 
 newGame();
