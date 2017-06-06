@@ -3,7 +3,12 @@ var DateNight={
 	create: function(){ //creates everything needed for the current main game state
 		console.log("DateNight: create");
 
-		var cannery = game.add.sprite(0,0,"concert");
+		this.bg = game.add.sprite(0,0,"line");
+
+		this.fatusprite = game.add.sprite(game.world.width/2,game.world.height/2+100,"fatu"); //add Fatu's sprite
+		this.fatusprite.anchor.x=.5;
+		this.fatusprite.anchor.y=.5;
+
 		this.textarray=[]; //array that holds all the game text for this part
 		this.storypart="fatu_start"; //keeps track of which part of the story we're on
 		this.successes=0;
@@ -221,7 +226,7 @@ var DateNight={
 				choicebutton1.scale.setTo(.75,.75);
 				choicebutton1.anchor.x=.5;
 				choicebutton1.anchor.y=.5;
-				var buttontext1=game.add.text(choicebutton1.x,choicebutton1.y,"That one catchy song your friend always sings (Charm)",{ fontSize: '22px', fill: 'white'});
+				var buttontext1=game.add.text(choicebutton1.x,choicebutton1.y,"That one catchy song your\nfriend always sings (Charm)",{ fontSize: '22px', fill: 'white'});
 				buttontext1.anchor.x=.5;
 				buttontext1.anchor.y=.5;
 
@@ -229,7 +234,7 @@ var DateNight={
 				choicebutton2.scale.setTo(.75,.75);
 				choicebutton2.anchor.x=.5;
 				choicebutton2.anchor.y=.5;
-				var buttontext2=game.add.text(choicebutton2.x,choicebutton2.y,"The fashion trend their lead singer started (Style)",{ fontSize: '22px', fill: 'white'});
+				var buttontext2=game.add.text(choicebutton2.x,choicebutton2.y,"The fashion trend their\nlead singer started (Style)",{ fontSize: '22px', fill: 'white'});
 				buttontext2.anchor.x=.5;
 				buttontext2.anchor.y=.5;
 				break;
@@ -237,15 +242,18 @@ var DateNight={
 			case "fatu_start_charm_failure":
 			case "fatu_start_style_success":
 			case "fatu_start_style_failure":
+				DateNight.fatusprite.loadTexture("fatu");
+				DateNight.bg.loadTexture("concert");
 				DateNight.storypart="fatu_keyboardist";
 				DateNight.readInText();
 				break;
 			case "fatu_keyboardist":
+				DateNight.fatusprite.loadTexture("fatusurprise");
 				let choicebutton3=game.add.button(440,360,"buttonsheet",function(){DateNight.statCheck("smarts"); buttontext3.destroy(); choicebutton3.destroy(); buttontext4.destroy(); choicebutton4.destroy();},this,"over","out","down");
 				choicebutton3.scale.setTo(.75,.75);
 				choicebutton3.anchor.x=.5;
 				choicebutton3.anchor.y=.5;
-				var buttontext3=game.add.text(choicebutton3.x,choicebutton3.y,"Mess with the keyboard's settings (Smarts)",{ fontSize: '22px', fill: 'white'});
+				var buttontext3=game.add.text(choicebutton3.x,choicebutton3.y,"Mess with the keyboard's\nsettings (Smarts)",{ fontSize: '22px', fill: 'white'});
 				buttontext3.anchor.x=.5;
 				buttontext3.anchor.y=.5;
 
@@ -261,6 +269,7 @@ var DateNight={
 			case "fatu_keyboardist_style_failure":
 			case "fatu_keyboardist_smarts_success":
 			case "fatu_keyboardist_smarts_failure":
+				DateNight.fatusprite.loadTexture("fatu");
 				DateNight.storypart="fatu_mosh";
 				DateNight.readInText();
 				break;
@@ -277,7 +286,7 @@ var DateNight={
 				choicebutton6.scale.setTo(.75,.75);
 				choicebutton6.anchor.x=.5;
 				choicebutton6.anchor.y=.5;
-				var buttontext6=game.add.text(choicebutton6.x,choicebutton6.y,"Just try not to get hurt (Smarts)",{ fontSize: '22px', fill: 'white'});
+				var buttontext6=game.add.text(choicebutton6.x,choicebutton6.y,"Just try not\nto get hurt (Smarts)",{ fontSize: '22px', fill: 'white'});
 				buttontext6.anchor.x=.5;
 				buttontext6.anchor.y=.5;
 				break;
@@ -285,6 +294,7 @@ var DateNight={
 			case "fatu_mosh_fitness_failure":
 			case "fatu_mosh_smarts_success":
 			case "fatu_mosh_smarts_failure":
+				DateNight.fatusprite.loadTexture("fatubashful");
 				DateNight.storypart="fatu_dance";
 				DateNight.readInText();
 				break;
@@ -301,7 +311,7 @@ var DateNight={
 				choicebutton8.scale.setTo(.75,.75);
 				choicebutton8.anchor.x=.5;
 				choicebutton8.anchor.y=.5;
-				var buttontext8=game.add.text(choicebutton8.x,choicebutton8.y,"Lead Fatu in a dance (Fitness)",{ fontSize: '22px', fill: 'white'});
+				var buttontext8=game.add.text(choicebutton8.x,choicebutton8.y,"Lead Fatu in\na dance (Fitness)",{ fontSize: '22px', fill: 'white'});
 				buttontext8.anchor.x=.5;
 				buttontext8.anchor.y=.5;
 				break;
@@ -309,10 +319,16 @@ var DateNight={
 			case "fatu_dance_fitness_failure":
 			case "fatu_dance_charm_success":
 			case "fatu_dance_charm_failure":
-				if(DateNight.successes>=2)
+				if(DateNight.successes>=2){
+					DateNight.bg.loadTexture("fatucharmedcg");
+					DateNight.fatusprite.destroy();
 					DateNight.storypart="fatu_end_success";				
-				else
+				}
+				else{
+					DateNight.bg.loadTexture("line");
+					DateNight.fatusprite.destroy();
 					DateNight.storypart="fatu_end_failure";
+				}
 				DateNight.readInText();
 				break;
 			case "fatu_end_failure":
@@ -328,19 +344,25 @@ var DateNight={
 			case "fatu_start":
 				if(stat=="charm"){
 					if(player.charm+Math.floor((Math.random()*50)+1)>50){
+						this.fatusprite.loadTexture("fatubashful");
 						this.storypart="fatu_start_charm_success";
 						this.successes++;
 					}
-					else
+					else{
+						this.fatusprite.loadTexture("fatudisappoint");
 						this.storypart="fatu_start_charm_failure";
+					}
 				}
 				else{
 					if(player.style+Math.floor((Math.random()*30)+1)>30){
+						this.fatusprite.loadTexture("fatusurprise");
 						this.storypart="fatu_start_style_success";
 						this.successes++;
 					}
-					else
+					else{
+						this.fatusprite.loadTexture("fatuangry");
 						this.storypart="fatu_start_style_failure";
+					}
 				}
 				break;
 			case "fatu_keyboardist":
@@ -349,52 +371,68 @@ var DateNight={
 						this.storypart="fatu_keyboardist_smarts_success";
 						this.successes++;
 					}
-					else
+					else{
+						this.fatusprite.loadTexture("fatudisappoint");
 						this.storypart="fatu_keyboardist_smarts_failure";
+					}
 				}
 				else{
 					if(player.style+Math.floor((Math.random()*30)+1)>30){
 						this.storypart="fatu_keyboardist_style_success";
 						this.successes++;
 					}
-					else
+					else{
+						this.fatusprite.loadTexture("fatuangry");
 						this.storypart="fatu_keyboardist_style_failure";
+					}
 				}
 				break;
 			case "fatu_mosh":
 				if(stat=="fitness"){
 					if(player.charm+Math.floor((Math.random()*30)+1)>30){
+						this.fatusprite.loadTexture("fatuhappy");
 						this.storypart="fatu_mosh_fitness_success";
 						this.successes++;
 					}
-					else
+					else{
+						this.fatusprite.loadTexture("fatudisappoint");
 						this.storypart="fatu_mosh_fitness_failure";
+					}
 				}
 				else{
 					if(player.smarts+Math.floor((Math.random()*50)+1)>50){
+						DateNight.fatusprite.loadTexture("fatusurprise");
 						this.storypart="fatu_mosh_smarts_success";
 						this.successes++;
 					}
-					else
+					else{
+						DateNight.fatusprite.loadTexture("fatudisappoint");
 						this.storypart="fatu_mosh_smarts_failure";
+					}
 				}
 				break;
 			case "fatu_dance":
 				if(stat=="fitness"){
 					if(player.charm+Math.floor((Math.random()*30)+1)>30){
+						this.fatusprite.loadTexture("fatuhappy");
 						this.storypart="fatu_dance_fitness_success";
 						this.successes++;
 					}
-					else
+					else{
+						DateNight.fatusprite.loadTexture("fatuangry");
 						this.storypart="fatu_dance_fitness_failure";
+					}
 				}
 				else{
 					if(player.charm+Math.floor((Math.random()*50)+1)>50){
+						this.fatusprite.loadTexture("fatuhappy");
 						this.storypart="fatu_dance_charm_success";
 						this.successes++;
 					}
-					else
+					else{
+						this.fatusprite.loadTexture("fatuangry");
 						this.storypart="fatu_dance_charm_failure";
+					}
 				}
 				break;
 		}
