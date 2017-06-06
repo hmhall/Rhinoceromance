@@ -4,21 +4,18 @@ var StatTraining={
 		//let pentas = new drawStats();
 		console.log("StatTraining: create");
 
-		let apartmentbg=game.add.sprite(0,0,"apartment");
+		let apartmentbg=game.add.sprite(0,0,"apartment"); //add background
 		apartmentbg.scale.setTo(.79,.79);
 
-		this.sudansprite = game.add.sprite(game.world.width/2,game.world.height/2+100,"base");
+		this.sudansprite = game.add.sprite(game.world.width/2,game.world.height/2+100,"base"); //add Sudan's sprite
 		this.sudansprite.scale.setTo(.75,.75);
 		this.sudansprite.anchor.x=.5;
 		this.sudansprite.anchor.y=.5;
 
-		this.buttonArray=[];
-		this.buttontext=[];
+		this.buttonArray=[]; //holds the buttons so they can be easily disabled
 
-		//creates buttons for each action that have text created on top of them
-		this.setupButtons("icons");
+		this.setupButtons("icons"); 
 
-		
 		//sets up a graphic to display the stats, and displays them
 		let statwindow = game.add.sprite(20,100,"statwindow");
 		statwindow.scale.setTo(.75,.75);
@@ -37,7 +34,7 @@ var StatTraining={
 		this.daytext.anchor.x=.5;
 		this.daytext.anchor.y=.5;
 		
-		this.stressBar = new Bar (this.game);
+		this.stressBar = new Bar (this.game); 
 		
 		let fortuneButton = this.add.button(950,50,"buttonsheet",this.toggleFortune,this,"miniover","miniout","minidown");
 		fortuneButton.scale.setTo(.3);
@@ -48,18 +45,18 @@ var StatTraining={
 		
 		this.stressBar.setPercent(100-player.stress*10);
 		
-		this.daytext.text="Day: "+day;
+		this.daytext.text="Day: "+day; //updates text
 		this.charmtext.text="Charm: "+player.charm;
 		this.fitnesstext.text="Fitness: "+player.fitness;
 		this.smartstext.text="Smarts: "+player.smarts;
 		this.styletext.text="Style: "+player.style;
 		//this.stresstext.text="Stress: "+player.stress;
 		
-		if (player.stress < 0) stress=0;
-		if (player.stress > 9) this.state.start("Gameover");
+		if (player.stress < 0) stress=0; //ensures stress is never below 0
+		if (player.stress > 9) this.state.start("Gameover"); //lose game if stress hits 10
 		
 	},
-	toggleFortune: function() {
+	toggleFortune: function() { //opens/closes the daily fortune menu when button is pressed
 		console.log(fortuneShow);
 	if (!fortuneShow){
 		console.log("tween");
@@ -102,7 +99,7 @@ var StatTraining={
 		//let fortuneTab = this.game 
 		fortuneShow = !fortuneShow;
 	},
-	actionButtonPressed: function(actiontype){ 
+	actionButtonPressed: function(actiontype){ //handles stat and sprite changes when the action buttons are pressed
 		console.log("StatTraining: actionButtonPressed");
 		switch(actiontype){
 			case "charm1": 
@@ -178,7 +175,7 @@ var StatTraining={
 				this.sudansprite.loadTexture("resting");
 				break;
 
-		}
+		} 
 		this.nextbutton=game.add.button(1100,350,"nextbutton",this.resetDay,this,"over","out","down");
 		this.nextbutton.scale.setTo(.75,.75);
 	},
@@ -186,14 +183,14 @@ var StatTraining={
 		this.sudansprite.loadTexture("base");
 		day++;
 		this.nextbutton.destroy();
-		if(day>=30){
+		if(day>=30){ //on day 30, instead of the regular icons, we have a button to go to the DateNight
 			let heartbutton=game.add.button(1050,250,"heart",function(){this.state.start("DateNight");},this); //when clicked, moves to DateNight
 			heartbutton.scale.setTo(.075,.075);
 		}
 		else
 			this.setupButtons("icons");
 	},
-	setupButtons: function(actionoptions){ 
+	setupButtons: function(actionoptions){ //sets up the buttons that correspond to the current actionoptions
 		console.log("StatTraining: setupButtons "+actionoptions);
 
 		modCharm=fortune[day][0][1];
