@@ -38,6 +38,10 @@ var Preloader={
 		this.load.image("fitness","img/fitness.png");
 		this.load.image("mask","img/mask.png");
 		this.load.image("rest","img/rest.png");
+		this.load.image("title","img/title.png");
+		this.load.image("startbutton","img/startbutton.png");
+		this.load.image("creditsbutton","img/credits.png");
+		this.load.image("badend","img/badend.png");
 
 		this.load.image("luckn","img/luckn.png");
 		this.load.image("luck0","img/luck0.png");
