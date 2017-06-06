@@ -248,7 +248,7 @@ var DateNight={
 				DateNight.readInText();
 				break;
 			case "fatu_keyboardist":
-				DateNight.fatusprite.loadTexture("fatusurprised");
+				DateNight.fatusprite.loadTexture("fatusurprise");
 				let choicebutton3=game.add.button(440,360,"buttonsheet",function(){DateNight.statCheck("smarts"); buttontext3.destroy(); choicebutton3.destroy(); buttontext4.destroy(); choicebutton4.destroy();},this,"over","out","down");
 				choicebutton3.scale.setTo(.75,.75);
 				choicebutton3.anchor.x=.5;
