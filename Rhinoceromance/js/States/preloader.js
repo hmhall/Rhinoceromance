@@ -26,9 +26,10 @@ var Preloader={
 		this.load.image("statwindow","img/statwindow.png");
 		this.load.image("daytimer","img/daytimer.png");
 		this.load.image("exercising","img/exercise.png");
-		this.load.image("resting","img/rest.png");
+		this.load.image("resting","img/resting.png");
 		this.load.image("studying","img/study.png");
 		this.load.image("stylin","img/stylin.png");
+		this.load.image("charming","img/charming.png");
 		this.load.image("cannery", "img/cannery.png");
 		this.load.image("concert", "img/concert.png");
 		this.load.image("charm","img/charm.png");
@@ -36,6 +37,7 @@ var Preloader={
 		this.load.image("smarts","img/smarts.png");
 		this.load.image("fitness","img/fitness.png");
 		this.load.image("mask","img/mask.png");
+		this.load.image("rest","img/rest.png");
 
 		this.load.image("luckn","img/luckn.png");
 		this.load.image("luck0","img/luck0.png");

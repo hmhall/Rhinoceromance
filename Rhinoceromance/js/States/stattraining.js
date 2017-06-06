@@ -16,9 +16,7 @@ var StatTraining={
 		this.buttontext=[];
 
 		//creates buttons for each action that have text created on top of them
-		if(actiontaken<=0){
-			this.setupButtons();
-		}
+		this.setupButtons("icons");
 
 		
 		//sets up a graphic to display the stats, and displays them
@@ -39,21 +37,11 @@ var StatTraining={
 		this.daytext.anchor.x=.5;
 		this.daytext.anchor.y=.5;
 		
-
-		this.timefordate=false;
 		this.stressBar = new Bar (this.game);
-
-
-		//daily
 		
-
 		let fortuneButton = this.add.button(950,50,"buttonsheet",this.toggleFortune,this,"miniover","miniout","minidown");
 		fortuneButton.scale.setTo(.3);
-		fortuneButton.anchor.set(0.5);
-
-		
-
-		//this.		
+		fortuneButton.anchor.set(0.5);	
 
 	},
 	update: function(){
@@ -66,57 +54,10 @@ var StatTraining={
 		this.smartstext.text="Smarts: "+player.smarts;
 		this.styletext.text="Style: "+player.style;
 		//this.stresstext.text="Stress: "+player.stress;
-
-		if(day==30&&!this.timefordate){ //creates heart button at day 30 exactly once
-			this.timefordate=true;
-			this.datebutton=game.add.button(700,600,"heart",function(){this.state.start("DateNight");},this); //when clicked, moves to DateNight
-			this.datebutton.scale.setTo(.075,.075);
-
-		}
-		if(actiontaken>0){
-			switch(actiontaken){
-				case 1:
-					this.sudansprite.loadTexture("sudan");
-
-					break;
-				case 2:
-					this.sudansprite.loadTexture("sudan");
-
-					break;
-				case 3:
-					this.sudansprite.loadTexture("exercising");
-
-					break;
-				case 4:
-					this.sudansprite.loadTexture("exercising");
-
-					break;
-				case 5:
-					this.sudansprite.loadTexture("studying");
-
-					break;
-				case 6:
-					this.sudansprite.loadTexture("studying");
-
-					break;
-				case 7:
-					this.sudansprite.loadTexture("stylin");
-
-					break;
-				case 8:
-					this.sudansprite.loadTexture("stylin");
-
-					break;
-				case 9:
-					this.sudansprite.loadTexture("resting");
-
-					break;
-			}
-			this.nextbutton=game.add.button(1100,350,"nextbutton",this.resetDay,this,"over","out","down");
-			this.nextbutton.scale.setTo(.75,.75);
-			actiontaken=-1;
-			if (player.stress > 9|player.stress <0) this.state.start("Gameover");
-		}
+		
+		if (player.stress < 0) stress=0;
+		if (player.stress > 9) this.state.start("Gameover");
+		
 	},
 	toggleFortune: function() {
 		console.log(fortuneShow);
@@ -161,55 +102,99 @@ var StatTraining={
 		//let fortuneTab = this.game 
 		fortuneShow = !fortuneShow;
 	},
-	actionButtonPressed: function(actiontype){ //starts minigame state if a minigame button is pressed, or simply increments stats
+	actionButtonPressed: function(actiontype){ 
 		console.log("StatTraining: actionButtonPressed");
+		switch(actiontype){
+			case "charm1": 
+				player.charm+=modCharm;
+				player.stress+=(stressCharm-1);
+				this.sudansprite.loadTexture("charming");
+				break;
+			case "charm2": 
+				player.charm+=(modCharm+1);
+				player.stress+=stressCharm;
+				this.sudansprite.loadTexture("charming");
+				break;
+			case "charm3": 
+				player.charm+=(modCharm+2);
+				player.stress+=(stressCharm+1);
+				this.sudansprite.loadTexture("charming");
+				break;
+			case "fitness1": 
+				player.fitness+=modFitness;
+				player.stress+=(stressFitness-1);
+				this.sudansprite.loadTexture("exercising");
+				break;
+			case "fitness2": 
+				player.fitness+=(modFitness+1);
+				player.stress+=stressFitness;
+				this.sudansprite.loadTexture("exercising");
+				break;
+			case "fitness3": 
+				player.fitness+=(modFitness+2);
+				player.stress+=(stressFitness+1);
+				this.sudansprite.loadTexture("exercising");
+				break;
+			case "style1": 
+				player.style+=modStyle;
+				player.stress+=(stressStyle-1);
+				this.sudansprite.loadTexture("stylin");
+				break;
+			case "style2": 
+				player.style+=(modStyle+1);
+				player.stress+=stressStyle;
+				this.sudansprite.loadTexture("stylin");
+				break;
+			case "style3": 
+				player.style+=(modStyle+2);
+				player.stress+=(stressStyle+1);
+				this.sudansprite.loadTexture("stylin");
+				break;
+			case "smarts1": 
+				player.smarts+=modSmarts;
+				player.stress+=(stressSmarts-1);
+				this.sudansprite.loadTexture("studying");
+				break;
+			case "smarts2": 
+				player.smarts+=(modSmarts+1);
+				player.smarts+=stressSmarts;
+				this.sudansprite.loadTexture("studying");
+				break;
+			case "smarts3": 
+				player.smarts+=(modSmarts+2);
+				player.stress+=(stressSmarts+1);
+				this.sudansprite.loadTexture("studying");
+				break;
+			case "rest1": 
+				player.stress-=3;
+				this.sudansprite.loadTexture("resting");
+				break;
+			case "rest2": 
+				player.charm-=1;
+				player.fitness-=1;
+				player.smarts-=1;
+				player.style-=1;
+				player.stress=0;
+				this.sudansprite.loadTexture("resting");
+				break;
 
-		if(actiontaken==0){
-			actiontaken=actiontype;
-			if(actiontaken%2==0){
-				this.state.start("MiniGames");
-			}
-			else{
-				switch(actiontaken){
-					case 1: 
-						player.charm+=modCharm;
-						player.stress+=stressCharm;
-						break;
-					case 3: 
-						player.fitness+=modFitness;
-						player.stress+=stressFitness;
-						break;
-					case 5: 
-						player.smarts+=modSmarts;
-						player.stress+=stressSmarts;
-						break;
-					case 7: 
-						player.style+=modStyle;
-						player.stress+=stressStyle;
-						break;
-					case 9:
-						player.stress--;
-						break;
-				}
-				for(let xi=0;xi<this.buttonArray.length;xi++){
-					this.buttonArray[xi].destroy();
-					this.buttontext[xi].destroy();
-				}
-			}
 		}
+		this.nextbutton=game.add.button(1100,350,"nextbutton",this.resetDay,this,"over","out","down");
+		this.nextbutton.scale.setTo(.75,.75);
 	},
 	resetDay: function(){ //resets the state of the game to the beginning of the day
 		this.sudansprite.loadTexture("base");
 		day++;
 		this.nextbutton.destroy();
-		actiontaken=0;
-		for(let xi=0;xi<this.buttonArray.length;xi++){
-			this.buttonArray[xi].destroy();
-			this.buttontext[xi].destroy();
+		if(day>=30){
+			let heartbutton=game.add.button(1050,250,"heart",function(){this.state.start("DateNight");},this); //when clicked, moves to DateNight
+			heartbutton.scale.setTo(.075,.075);
 		}
-		this.setupButtons();
+		else
+			this.setupButtons("icons");
 	},
-	setupButtons: function(){ //generates 4 random buttons out of a possible 8 and displays them on the screen
+	setupButtons: function(actionoptions){ 
+		console.log("StatTraining: setupButtons "+actionoptions);
 
 		modCharm=fortune[day][0][1];
 		modFitness=fortune[day][1][1];
@@ -220,106 +205,224 @@ var StatTraining={
 		stressSmarts=fortune[day][2][2];
 		stressStyle= fortune[day][3][2];
 
-		let currbutton;
-		let actionoptions=[];
-		let keeplooping=true;
-		for (let xi=0; xi < 4; xi++) { //generates a random number then checks if it's already in the actionoptions array. If not, adds it to the array. If so, generates another and repeats
-			while(keeplooping){
-				keeplooping=false;
-				currbutton=Math.floor((Math.random()*8)+1);
-				for (let zi=0; zi < actionoptions.length; zi++) {
-					if(actionoptions[zi]==currbutton)
-						keeplooping=true;
-				}
-			}
-			actionoptions[xi]=currbutton;
-			keeplooping=true;
-		}
-		actionoptions.sort(function(a,b){return a-b}); //sorts array in ascending order
-		for (let xi=0; xi < 4; xi++) { //generates buttons
+		var buttonGroup=game.add.group();
 
-			switch(actionoptions[xi]){
-				case 1:
-					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(1);},this,"over", "out", "down"); 
-					this.buttonArray[xi].scale.setTo(.5,.5);
-					this.buttonArray[xi].anchor.x=.5;
-					this.buttonArray[xi].anchor.y=.5;
-					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Go out for a drink",{ fontSize: '22px', fill: 'white'});
-					this.buttontext[xi].anchor.x=.5;
-					this.buttontext[xi].anchor.y=.5;
-					break;
-				case 2:
-					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(2);},this,"over", "out", "down"); 
-					this.buttonArray[xi].scale.setTo(.5,.5);
-					this.buttonArray[xi].anchor.x=.5;
-					this.buttonArray[xi].anchor.y=.5;
-					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Go to a party",{ fontSize: '22px', fill: 'white'});
-					this.buttontext[xi].anchor.x=.5;
-					this.buttontext[xi].anchor.y=.5;
-					break;
-				case 3:
-					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(3);},this,"over", "out", "down"); 
-					this.buttonArray[xi].scale.setTo(.5,.5);
-					this.buttonArray[xi].anchor.x=.5;
-					this.buttonArray[xi].anchor.y=.5;
-					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Do yoga",{ fontSize: '22px', fill: 'white'});
-					this.buttontext[xi].anchor.x=.5;
-					this.buttontext[xi].anchor.y=.5;
-					break;
-				case 4:
-					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(4);},this,"over", "out", "down"); 
-					this.buttonArray[xi].scale.setTo(.5,.5);
-					this.buttonArray[xi].anchor.x=.5;
-					this.buttonArray[xi].anchor.y=.5;
-					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Lift weights",{ fontSize: '22px', fill: 'white'});
-					this.buttontext[xi].anchor.x=.5;
-					this.buttontext[xi].anchor.y=.5;
-					break;
-				case 5:
-					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(5);},this,"over", "out", "down"); 
-					this.buttonArray[xi].scale.setTo(.5,.5);
-					this.buttonArray[xi].anchor.x=.5;
-					this.buttonArray[xi].anchor.y=.5;
-					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Read a book",{ fontSize: '22px', fill: 'white'});
-					this.buttontext[xi].anchor.x=.5;
-					this.buttontext[xi].anchor.y=.5;
-					break;
-				case 6:
-					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(6);},this,"over", "out", "down"); 
-					this.buttonArray[xi].scale.setTo(.5,.5);
-					this.buttonArray[xi].anchor.x=.5;
-					this.buttonArray[xi].anchor.y=.5;
-					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Study",{ fontSize: '22px', fill: 'white'});
-					this.buttontext[xi].anchor.x=.5;
-					this.buttontext[xi].anchor.y=.5;
-					break;
-				case 7:
-					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(7);},this,"over", "out", "down"); 
-					this.buttonArray[xi].scale.setTo(.5,.5);
-					this.buttonArray[xi].anchor.x=.5;
-					this.buttonArray[xi].anchor.y=.5;
-					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Try on new clothes",{ fontSize: '22px', fill: 'white'});
-					this.buttontext[xi].anchor.x=.5;
-					this.buttontext[xi].anchor.y=.5;
-					break;
-				case 8:
-					this.buttonArray[xi]=game.add.button(1150, 100+xi*100, "buttonsheet", function(){this.actionButtonPressed(8);},this,"over", "out", "down"); 
-					this.buttonArray[xi].scale.setTo(.5,.5);
-					this.buttonArray[xi].anchor.x=.5;
-					this.buttonArray[xi].anchor.y=.5;
-					this.buttontext[xi]=game.add.text(this.buttonArray[xi].x,this.buttonArray[xi].y, "Manscape",{ fontSize: '22px', fill: 'white'});
-					this.buttontext[xi].anchor.x=.5;
-					this.buttontext[xi].anchor.y=.5;
-					break;
-			}
+		switch(actionoptions){
+			case "icons":
+				button1=game.add.button(1150, 150, "charm", function(){buttonGroup.destroy(); this.setupButtons("charm");},this); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				buttonGroup.add(button1);
+
+				button1=game.add.button(1150, 250, "fitness", function(){buttonGroup.destroy(); this.setupButtons("fitness");},this); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				buttonGroup.add(button1);
+
+				button1=game.add.button(1150, 350, "smarts", function(){buttonGroup.destroy(); this.setupButtons("smarts");},this); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				buttonGroup.add(button1);
+
+				button1=game.add.button(1150, 450, "style", function(){buttonGroup.destroy(); this.setupButtons("style");},this); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				buttonGroup.add(button1);
+
+				if(player.stress!=0){
+					button1=game.add.button(1150, 550, "rest", function(){buttonGroup.destroy(); this.setupButtons("rest");},this); 
+					button1.anchor.x=.5;
+					button1.anchor.y=.5;
+					buttonGroup.add(button1);
+				}
+				break;
+			case "charm":
+				button1=game.add.button(1150, 150, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("charm1");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Relaxed",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 250, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("charm2");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Moderate",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 350, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("charm3");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Intense",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 450, "buttonsheet", function(){buttonGroup.destroy(); this.setupButtons("icons");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Back",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+				break;
+
+			case "fitness":
+				button1=game.add.button(1150, 150, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("fitness1");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Relaxed",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 250, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("fitness2");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Moderate",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 350, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("fitness3");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Intense",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 450, "buttonsheet", function(){buttonGroup.destroy(); this.setupButtons("icons");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Back",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+				break;
+			case "smarts":
+				button1=game.add.button(1150, 150, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("smarts1");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Relaxed",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 250, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("smarts2");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Moderate",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 350, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("smarts3");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Intense",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 450, "buttonsheet", function(){buttonGroup.destroy(); this.setupButtons("icons");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Back",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+				break;
+			case "style":
+				button1=game.add.button(1150, 150, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("style1");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Relaxed",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 250, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("style2");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Moderate",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 350, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("style3");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Intense",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 450, "buttonsheet", function(){buttonGroup.destroy(); this.setupButtons("icons");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Back",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+				break;
+			case "rest":
+				button1=game.add.button(1150, 150, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("rest1");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Light Rest",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+
+				button1=game.add.button(1150, 400, "buttonsheet", function(){buttonGroup.destroy(); this.actionButtonPressed("rest2");},this,"over", "out", "down"); 
+				button1.anchor.x=.5;
+				button1.anchor.y=.5;
+				button1.scale.setTo(.5,.5);
+				buttonGroup.add(button1);
+				buttontext1=game.add.text(button1.x,button1.y, "Sleep All Day",{ fontSize: '22px', fill: 'white'});
+				buttontext1.anchor.x=.5;
+				buttontext1.anchor.y=.5;
+				buttonGroup.add(buttontext1);
+				break;
 		}
-		this.buttonArray[4] = game.add.button(1150, 500, "buttonsheet", function(){this.actionButtonPressed(9);},this,"over", "out", "down"); 
-		this.buttonArray[4].scale.setTo(.5,.5);
-		this.buttonArray[4].anchor.x=.5;
-		this.buttonArray[4].anchor.y=.5;
-		this.buttontext[4]=game.add.text(this.buttonArray[4].x,this.buttonArray[4].y, "Take a day off",{ fontSize: '22px', fill: 'white'});
-		this.buttontext[4].anchor.x=.5;
-		this.buttontext[4].anchor.y=.5;
 
 	}
 };
