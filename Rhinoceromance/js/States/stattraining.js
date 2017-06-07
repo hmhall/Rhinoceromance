@@ -2,6 +2,8 @@
 var StatTraining={
 	create: function(){ //creates everything needed for the current state
 		//let pentas = new drawStats();
+
+
 		console.log("StatTraining: create");
 
 		let apartmentbg=game.add.sprite(0,0,"apartment"); //add background
@@ -11,9 +13,6 @@ var StatTraining={
 		this.sudansprite.scale.setTo(.75,.75);
 		this.sudansprite.anchor.x=.5;
 		this.sudansprite.anchor.y=.5;
-
-		//this.song = game.add.audio("statTraining");
-		//this.song.play('', 0, 1, true);
 
 		this.buttonArray=[]; //holds the buttons so they can be easily disabled
 
@@ -43,6 +42,10 @@ var StatTraining={
 		fortuneButton.scale.setTo(.3);
 		fortuneButton.anchor.set(0.5);	
 
+		// Sound
+		buttonClicked = game.add.audio("buttonAudio");
+		statTrainingBGM = game.add.audio("statTrainingAudio",0.1,true);
+		statTrainingBGM.play();
 	},
 	update: function(){
 		
@@ -60,6 +63,7 @@ var StatTraining={
 		
 	},
 	toggleFortune: function() { //opens/closes the daily fortune menu when button is pressed
+		buttonClicked.play();
 		console.log(fortuneShow);
 	if (!fortuneShow){
 		console.log("tween");
@@ -103,6 +107,7 @@ var StatTraining={
 		fortuneShow = !fortuneShow;
 	},
 	actionButtonPressed: function(actiontype){ //handles stat and sprite changes when the action buttons are pressed
+		buttonClicked.play();
 		console.log("StatTraining: actionButtonPressed");
 		switch(actiontype){
 			case "charm1": 
@@ -183,13 +188,15 @@ var StatTraining={
 		this.nextbutton.scale.setTo(.75,.75);
 	},
 	resetDay: function(){ //resets the state of the game to the beginning of the day
+		buttonClicked.play();
 		this.sudansprite.loadTexture("base");
 		day++;
 		this.nextbutton.destroy();
 		if(day>=30){ //on day 30, instead of the regular icons, we have a button to go to the DateNight
 			//this.song.stop(0); // stops music on day 30
-			let heartbutton=game.add.button(1050,250,"heart",function(){this.state.start("DateNight");},this); //when clicked, moves to DateNight
+			let heartbutton=game.add.button(1050,250,"heart",function(){statTrainingBGM.stop();this.state.start("DateNight");},this); //when clicked, moves to DateNight
 			heartbutton.scale.setTo(.075,.075);
+			
 		}
 		else
 			this.setupButtons("icons");
@@ -210,28 +217,28 @@ var StatTraining={
 
 		switch(actionoptions){
 			case "icons":
-				this.buttonArray[0]=game.add.button(1150, 150, "charm", function(){buttonGroup.destroy(); this.setupButtons("charm");},this); 
+				this.buttonArray[0]=game.add.button(1150, 150, "charm", function(){buttonGroup.destroy(); buttonClicked.play(); this.setupButtons("charm");},this); 
 				this.buttonArray[0].anchor.x=.5;
 				this.buttonArray[0].anchor.y=.5;
 				buttonGroup.add(this.buttonArray[0]);
 
-				this.buttonArray[1]=game.add.button(1150, 250, "fitness", function(){buttonGroup.destroy(); this.setupButtons("fitness");},this); 
+				this.buttonArray[1]=game.add.button(1150, 250, "fitness", function(){buttonGroup.destroy(); buttonClicked.play(); this.setupButtons("fitness");},this); 
 				this.buttonArray[1].anchor.x=.5;
 				this.buttonArray[1].anchor.y=.5;
 				buttonGroup.add(this.buttonArray[1]);
 
-				this.buttonArray[2]=game.add.button(1150, 350, "smarts", function(){buttonGroup.destroy(); this.setupButtons("smarts");},this); 
+				this.buttonArray[2]=game.add.button(1150, 350, "smarts", function(){buttonGroup.destroy(); buttonClicked.play(); this.setupButtons("smarts");},this); 
 				this.buttonArray[2].anchor.x=.5;
 				this.buttonArray[2].anchor.y=.5;
 				buttonGroup.add(this.buttonArray[2]);
 
-				this.buttonArray[3]=game.add.button(1150, 450, "style", function(){buttonGroup.destroy(); this.setupButtons("style");},this); 
+				this.buttonArray[3]=game.add.button(1150, 450, "style", function(){buttonGroup.destroy(); buttonClicked.play(); this.setupButtons("style");},this); 
 				this.buttonArray[3].anchor.x=.5;
 				this.buttonArray[3].anchor.y=.5;
 				buttonGroup.add(this.buttonArray[3]);
 
 				if(player.stress!=0){
-					this.buttonArray[4]=game.add.button(1150, 550, "rest", function(){buttonGroup.destroy(); this.setupButtons("rest");},this); 
+					this.buttonArray[4]=game.add.button(1150, 550, "rest", function(){buttonGroup.destroy(); buttonClicked.play(); this.setupButtons("rest");},this); 
 					this.buttonArray[4].anchor.x=.5;
 					this.buttonArray[4].anchor.y=.5;
 					buttonGroup.add(this.buttonArray[4]);
