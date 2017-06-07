@@ -3,7 +3,7 @@ var Mainmenu={
 	create: function(){ //creates everything needed for main menu
 		console.log('Mainmenu: create');
 		this.stage.backgroundColor = "#CEF6F5";
-		game.add.tileSprite(0, 0, 1280, 720, "title");
+		game.add.tileSprite(0, 0, 1280, 720, "loading");
 		this.keypress = game.add.audio('keypress'); 
 
 		//this.song = game.add.audio("mainMenu");
