@@ -59,7 +59,7 @@ var StatTraining={
 		//this.stresstext.text="Stress: "+player.stress;
 		
 		if (player.stress < 0) stress=0; //ensures stress is never below 0
-		if (player.stress > 9) /*this.song.stop(0);*/ this.state.start("Gameover"); //lose game if stress hits 10 and stops music
+		if (player.stress > 9) {statTrainingBGM.stop();this.state.start("Gameover");} //lose game if stress hits 10 and stops music
 		
 	},
 	toggleFortune: function() { //opens/closes the daily fortune menu when button is pressed
