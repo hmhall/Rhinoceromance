@@ -6,6 +6,9 @@ var Mainmenu={
 		game.add.tileSprite(0, 0, 1280, 720, "title");
 		this.keypress = game.add.audio('keypress'); 
 
+		this.song = game.add.audio("mainMenu");
+		this.song.play('', 0, 1, true);
+
 		var titletY = new Typewriter();
 		titletY.init(Mainmenu, {
 			x: 600,

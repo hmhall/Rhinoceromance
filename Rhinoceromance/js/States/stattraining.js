@@ -12,6 +12,9 @@ var StatTraining={
 		this.sudansprite.anchor.x=.5;
 		this.sudansprite.anchor.y=.5;
 
+		this.song = game.add.audio("statTraining");
+		this.song.play('', 0, 1, true);
+
 		this.buttonArray=[]; //holds the buttons so they can be easily disabled
 
 		this.setupButtons("icons"); 

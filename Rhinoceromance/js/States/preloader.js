@@ -51,6 +51,11 @@ var Preloader={
 		this.load.image("luck2","img/luck2.png");
 
 		this.load.audio("keypress", "audio/keystroke.ogg");
+		this.load.audio("button", "audio/click.wav");
+		this.load.audio("mainMenu", "audio/POL-starry-night-short.wav");
+		this.load.audio("statTraining", "audio/POL-cooking-mania-short.wav");
+		this.load.audio("dateState", "audio/POL-jammy-jam-short.wav");
+		this.load.audio("gameOver", "audio/POL-sacred-temple-short.wav");
 
 		this.load.bitmapFont('blackFont','font/black.png', 'font/black.fnt');
 

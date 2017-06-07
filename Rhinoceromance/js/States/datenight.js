@@ -3,6 +3,9 @@ var DateNight={
 	create: function(){ //creates everything needed for the current main game state
 		console.log("DateNight: create");
 
+		this.song = game.add.audio("dateState");
+		this.song.play('', 0, 1, true);
+
 		this.bg = game.add.sprite(0,0,"line");
 
 		this.fatusprite = game.add.sprite(game.world.width/2,game.world.height/2+100,"fatu"); //add Fatu's sprite
