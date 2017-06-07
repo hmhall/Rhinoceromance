@@ -3,8 +3,8 @@ var DateNight={
 	create: function(){ //creates everything needed for the current main game state
 		console.log("DateNight: create");
 
-		this.song = game.add.audio("dateState");
-		this.song.play('', 0, 1, true);
+		//this.song = game.add.audio("dateState");
+		//this.song.play('', 0, 1, true);
 
 		this.bg = game.add.sprite(0,0,"line");
 
@@ -336,7 +336,7 @@ var DateNight={
 				break;
 			case "fatu_end_failure":
 			case "fatu_end_success":
-				this.song.stop(0);
+				//this.song.stop(0);
 				game.state.start("Mainmenu");
 				newGame();
 				break;

@@ -6,8 +6,8 @@ var Mainmenu={
 		game.add.tileSprite(0, 0, 1280, 720, "title");
 		this.keypress = game.add.audio('keypress'); 
 
-		this.song = game.add.audio("mainMenu");
-		this.song.play('', 0, 1, true);
+		//this.song = game.add.audio("mainMenu");
+		//this.song.play('', 0, 1, true);
 
 		var titletY = new Typewriter();
 		titletY.init(Mainmenu, {
@@ -35,7 +35,7 @@ var Mainmenu={
 		//this.state.start("StatTraining");
 	},
 	changeState: function(){
-		this.song.stop(0);
+		//this.song.stop(0);
 		game.state.start("StatTraining");
 	}	
 };

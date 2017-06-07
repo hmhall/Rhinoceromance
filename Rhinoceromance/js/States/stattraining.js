@@ -12,8 +12,8 @@ var StatTraining={
 		this.sudansprite.anchor.x=.5;
 		this.sudansprite.anchor.y=.5;
 
-		this.song = game.add.audio("statTraining");
-		this.song.play('', 0, 1, true);
+		//this.song = game.add.audio("statTraining");
+		//this.song.play('', 0, 1, true);
 
 		this.buttonArray=[]; //holds the buttons so they can be easily disabled
 
@@ -56,7 +56,7 @@ var StatTraining={
 		//this.stresstext.text="Stress: "+player.stress;
 		
 		if (player.stress < 0) stress=0; //ensures stress is never below 0
-		if (player.stress > 9) this.song.stop(0); this.state.start("Gameover"); //lose game if stress hits 10 and stops music
+		if (player.stress > 9) /*this.song.stop(0);*/ this.state.start("Gameover"); //lose game if stress hits 10 and stops music
 		
 	},
 	toggleFortune: function() { //opens/closes the daily fortune menu when button is pressed
@@ -187,7 +187,7 @@ var StatTraining={
 		day++;
 		this.nextbutton.destroy();
 		if(day>=30){ //on day 30, instead of the regular icons, we have a button to go to the DateNight
-			this.song.stop(0); // stops music on day 30
+			//this.song.stop(0); // stops music on day 30
 			let heartbutton=game.add.button(1050,250,"heart",function(){this.state.start("DateNight");},this); //when clicked, moves to DateNight
 			heartbutton.scale.setTo(.075,.075);
 		}
