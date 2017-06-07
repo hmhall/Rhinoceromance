@@ -2,7 +2,7 @@
 var Preloader={
 	preload: function() { // preload assets
 		console.log('Preloader: preload');
-
+		this.stage.backgroundColor = "#FFFFFF";
 		var loadingBar = this.add.sprite(game.width/2, game.height/2, 'loading');
 		loadingBar.anchor.set(0.5);
 		game.load.setPreloadSprite(loadingBar);
