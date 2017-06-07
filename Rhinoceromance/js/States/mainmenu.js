@@ -35,6 +35,7 @@ var Mainmenu={
 		//this.state.start("StatTraining");
 	},
 	changeState: function(){
+		this.song.stop(0);
 		game.state.start("StatTraining");
 	}	
 };

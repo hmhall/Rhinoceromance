@@ -336,6 +336,7 @@ var DateNight={
 				break;
 			case "fatu_end_failure":
 			case "fatu_end_success":
+				this.song.stop(0);
 				game.state.start("Mainmenu");
 				newGame();
 				break;

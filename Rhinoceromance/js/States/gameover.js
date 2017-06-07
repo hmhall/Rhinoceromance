@@ -12,6 +12,7 @@ var Gameover={
 	},
 	restart: function(){  //returns to main menu
 		console.log("Gameover: restart");
+		this.song.stop(0);
 		game.state.start("Mainmenu");
 		newGame();
 		
