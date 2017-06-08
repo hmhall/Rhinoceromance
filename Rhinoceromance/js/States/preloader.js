@@ -59,6 +59,7 @@ var Preloader={
 		this.load.audio("gameOverAudio", "audio/POL-sacred-temple-short.wav");
 
 		this.load.bitmapFont('blackFont','font/black.png', 'font/black.fnt');
+		this.load.bitmapFont('custom', 'font/font.png', 'font/font.fnt');
 
 	},
 	create: function() {

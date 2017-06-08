@@ -15,12 +15,13 @@ var Mainmenu={
 		titletY.init(Mainmenu, {
 			x: 600,
 			y: 300,
-			fontFamily: "blackFont",
+			//fontFamily: "blackFont",
+			fontFamily: "custom",
 			fontSize: 32,
 			maxWidth: 650,
 			time: 2,
 			sound: keypress,
-			dialogues: ["In this game, you play as the last male northern white rhino.", "Your goal is to court one of two female rhinos to save your species.", "Chose activities to perform to raise your stats.", "As you perform stats, your stress level will rise. To lower stress, chose the rest activity.", "Be wary of your daily fortune, as your it will affect how well you perform each activity.", "Good luck, the future of the northern white rhinoceros species is in your hands!",],
+			dialogues: ["In this game, you play as the last male northern white rhino.", "Your goal is to court one of two female rhinos to save your species.", "Well, actually just one. The other is paid DLC, mostly because her route does not exist.", "In any case...", "Chose activities to perform to raise your stats, each with three levels of intensities.", "As you perform actions, your stress level will rise.", "The amount of stress depends on both your luck for the day, which you can check through your daily fortune, and the intensity of the activity.", "To lower stress, chose the rest activity.", "Remember to take care of yourself! All the stats in the world can't save you from a stress-induced heart attack.", "Good luck, the future of the northern white rhinoceros species is in your hands!",],
 			dialogueEndFn: this.changeState
 		});
 		titletY.start();
