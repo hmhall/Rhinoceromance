@@ -213,7 +213,7 @@ var DateNight={
 		titletY.init(DateNight, {
 			x: 100,
 			y: 500,
-			fontFamily: "blackFont",
+			fontFamily: "custom",
 			fontSize: 32,
 			maxWidth: 800,
 			sound: keypress,
