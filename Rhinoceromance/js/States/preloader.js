@@ -11,6 +11,7 @@ var Preloader={
 		
 		this.load.atlas("buttonsheet","img/buttonsheet.png","img/buttonsheet.json");
 		this.load.atlas("nextbutton","img/nextbutton.png","img/nextbutton.json");
+		this.load.atlas("fortunebutton","img/organic_buttons.png","img/organic_buttons.json");
 		this.load.image("bg","img/bg.png");
 		this.load.image("sudan","img/sudan.png");
 		this.load.image("fatu","img/fatu.png");

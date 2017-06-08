@@ -38,11 +38,11 @@ var StatTraining={
 		
 		this.stressBar = new Bar (this.game); 
 		
-		this.fortuneButton = this.add.button(950,50,"buttonsheet",this.toggleFortune,this,"miniover","miniout","minidown");
+		this.fortuneButton = this.add.button(950,50,"fortunebutton",this.toggleFortune,this,"fortune","news");
 		this.fortuneButton.scale.setTo(.3);
 		this.fortuneButton.anchor.set(0.5);	
 
-		this.messages=["Fatu commented on your photo \"talking with the lads\":\n\"I've said it before and I'll say it again.\nWhy talk when you could be doing something?\"",
+		this.messages=["Fatu commented on your photo\n\"talking with the lads\":\n\"I've said it before and I'll say it again.\nWhy talk when you could be doing\nsomething?\"",
 		"Fatu commented on your photo\n\"chillin' with the homies\":\n\"Who even talks like that anymore lmao\"",
 		"Fatu commented on your photo\n\"Hanging with my rhinoce-bros\":\n\"Lame pun, dude\"",
 		"Fatu liked your photo\n\"Getting Swole #fitlife\"",
@@ -223,6 +223,7 @@ var StatTraining={
 
 		this.nextbutton=game.add.button(1100,350,"nextbutton",this.resetDay,this,"over","out","down");
 		this.nextbutton.scale.setTo(.75,.75);
+		this.fortuneButton.inputEnabled=false;
 	},
 	resetDay: function(){ //resets the state of the game to the beginning of the day
 		buttonClicked.play();
@@ -236,6 +237,7 @@ var StatTraining={
 		}
 		else
 			this.setupButtons("icons");
+		this.fortuneButton.inputEnabled=true;
 		this.message.text="";
 	},
 	setupButtons: function(actionoptions){ //sets up the buttons that correspond to the current actionoptions
