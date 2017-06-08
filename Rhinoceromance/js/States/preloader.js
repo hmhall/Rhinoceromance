@@ -51,7 +51,7 @@ var Preloader={
 		this.load.image("luck1","img/luck1.png");
 		this.load.image("luck2","img/luck2.png");
 
-		this.load.audio("keypress", "audio/keystroke.ogg");
+		this.load.audio("keypress", "audio/sketching.mp3");
 		this.load.audio("buttonAudio", "audio/click.wav");
 		this.load.audio("mainMenuAudio", "audio/POL-starry-night-short.wav");
 		this.load.audio("statTrainingAudio", "audio/POL-cooking-mania-short.wav");
