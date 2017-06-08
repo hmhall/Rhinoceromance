@@ -19,12 +19,12 @@ var StatTraining={
 		this.setupButtons("icons"); 
 
 		//sets up a graphic to display the stats, and displays them
-		let statwindow = game.add.sprite(20,100,"statwindow");
-		statwindow.scale.setTo(.75,.75);
-		this.charmtext=game.add.text(35, 120, "Charm: 10", { fontSize: '32px', fill: 'white' });
-		this.fitnesstext=game.add.text(35, 170, "Fitness: 10", { fontSize: '32px', fill: 'white' });
-		this.smartstext=game.add.text(35, 220, "Smarts: 10", { fontSize: '32px', fill: 'white' });
-		this.styletext=game.add.text(35, 270, "Style: 10", { fontSize: '32px', fill: 'white' });
+		let statwindow = game.add.sprite(-70,100,"statwindow");
+		this.charmtext=game.add.text(55, 170, "Charm: 10", { fontSize: '32px', fill: 'black' });
+		this.fitnesstext=game.add.text(55, 220, "Fitness: 10", { fontSize: '32px', fill: 'black' });
+		this.smartstext=game.add.text(55, 270, "Smarts: 10", { fontSize: '32px', fill: 'black' });
+		this.styletext=game.add.text(55, 320, "Style: 10", { fontSize: '32px', fill: 'black' });
+		this.message=game.add.text(35, 170, "", { fontSize: '14px', fill: 'black' });
 		//this.stresstext=game.add.text(35, 320, "Stress: 0", { fontSize: '32px', fill: 'white' });
 
 
@@ -38,9 +38,25 @@ var StatTraining={
 		
 		this.stressBar = new Bar (this.game); 
 		
-		let fortuneButton = this.add.button(950,50,"buttonsheet",this.toggleFortune,this,"miniover","miniout","minidown");
-		fortuneButton.scale.setTo(.3);
-		fortuneButton.anchor.set(0.5);	
+		this.fortuneButton = this.add.button(950,50,"buttonsheet",this.toggleFortune,this,"miniover","miniout","minidown");
+		this.fortuneButton.scale.setTo(.3);
+		this.fortuneButton.anchor.set(0.5);	
+
+		this.messages=["Fatu commented on your photo \"talking with the lads\":\n\"I've said it before and I'll say it again.\nWhy talk when you could be doing something?\"",
+		"Fatu commented on your photo\n\"chillin' with the homies\":\n\"Who even talks like that anymore lmao\"",
+		"Fatu commented on your photo\n\"Hanging with my rhinoce-bros\":\n\"Lame pun, dude\"",
+		"Fatu liked your photo\n\"Getting Swole #fitlife\"",
+		"Fatu commented on your photo\n\"Gains for days #foodiefitness\":\n\"I'd never date a slob who didn't work out",
+		"Fatu commented on your status\n\"Work hard play hard Never stop the grind 100%\":\n\"Keep it real\"",
+		"Fatu commented on your photo\n\"Exercising my mind\":\n\"Laaaaaaaame... jk but not really\"",
+		"Fatu commented on your life event\n\"Studied at Dogsnorts School of Magic\":\n\"What a nerd ;P\"",
+		"Fatu commented on your photo\n\"Spending some time studying\":\n\"You can stop studying now, we're not in school anymore\"",
+		"Fatu commented on your photo\n\"New duds!\":\n\"Lookin good! ;) ;) ;)\"",
+		"Fatu liked your photo\n\"Wow oops I guess my camera turned on...\ntotally didn't mean to post this lol\"",
+		"Fatu commented on your photo\n\"#notamodel #selfiestick #manscape\":\n\"Daaaaaamn looking fine, Sudan!\"",
+		"Fatu posted a photo\n\"The lighting in this dressing room is so good!\"",
+		"Fatu posted a photo\n\"New workout clothes! Now if only I\nhad someone to work out with...\"",
+		"Fatu posted a photo\n\"So many guys these days don't put\nenough effort into their appearance\"",];
 
 		// Sound
 		buttonClicked = game.add.audio("buttonAudio");
@@ -51,12 +67,13 @@ var StatTraining={
 		
 		this.stressBar.setPercent(100-player.stress*10);
 		
-		this.daytext.text="Day: "+day; //updates text
-		this.charmtext.text="Charm: "+player.charm;
-		this.fitnesstext.text="Fitness: "+player.fitness;
-		this.smartstext.text="Smarts: "+player.smarts;
-		this.styletext.text="Style: "+player.style;
-		//this.stresstext.text="Stress: "+player.stress;
+		if(!this.endofday){
+			this.daytext.text="Day: "+day; //updates text
+			this.charmtext.text="Charm: "+player.charm;
+			this.fitnesstext.text="Fitness: "+player.fitness;
+			this.smartstext.text="Smarts: "+player.smarts;
+			this.styletext.text="Style: "+player.style;
+		}
 		
 		if (player.stress < 0) stress=0; //ensures stress is never below 0
 		if (player.stress > 9) {statTrainingBGM.stop();this.state.start("Gameover");} //lose game if stress hits 10 and stops music
@@ -114,65 +131,78 @@ var StatTraining={
 				player.charm+=modCharm;
 				player.stress+=(stressCharm-1);
 				this.sudansprite.loadTexture("charming");
+				this.message.text=this.messages[Math.floor(Math.random()*3)];
 				break;
 			case "charm2": 
 				player.charm+=(modCharm+1);
 				player.stress+=stressCharm;
 				this.sudansprite.loadTexture("charming");
+				this.message.text=this.messages[Math.floor(Math.random()*3)];
 				break;
 			case "charm3": 
 				player.charm+=(modCharm+2);
 				player.stress+=(stressCharm+1);
 				this.sudansprite.loadTexture("charming");
+				this.message.text=this.messages[Math.floor(Math.random()*3)];
 				break;
 			case "fitness1": 
 				player.fitness+=modFitness;
 				player.stress+=(stressFitness-1);
 				this.sudansprite.loadTexture("exercising");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+3];
 				break;
 			case "fitness2": 
 				player.fitness+=(modFitness+1);
 				player.stress+=stressFitness;
 				this.sudansprite.loadTexture("exercising");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+3];
 				break;
 			case "fitness3": 
 				player.fitness+=(modFitness+2);
 				player.stress+=(stressFitness+1);
 				this.sudansprite.loadTexture("exercising");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+3];
 				break;
 			case "style1": 
 				player.style+=modStyle;
 				player.stress+=(stressStyle-1);
 				this.sudansprite.loadTexture("stylin");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+6];
 				break;
 			case "style2": 
 				player.style+=(modStyle+1);
 				player.stress+=stressStyle;
 				this.sudansprite.loadTexture("stylin");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+6];
 				break;
 			case "style3": 
 				player.style+=(modStyle+2);
 				player.stress+=(stressStyle+1);
 				this.sudansprite.loadTexture("stylin");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+6];
 				break;
 			case "smarts1": 
 				player.smarts+=modSmarts;
 				player.stress+=(stressSmarts-1);
 				this.sudansprite.loadTexture("studying");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+9];
 				break;
 			case "smarts2": 
 				player.smarts+=(modSmarts+1);
 				player.smarts+=stressSmarts;
 				this.sudansprite.loadTexture("studying");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+9];
 				break;
 			case "smarts3": 
 				player.smarts+=(modSmarts+2);
 				player.stress+=(stressSmarts+1);
 				this.sudansprite.loadTexture("studying");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+9];
 				break;
 			case "rest1": 
 				player.stress-=3;
 				this.sudansprite.loadTexture("resting");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+12];
 				break;
 			case "rest2": 
 				player.charm-=1;
@@ -181,9 +211,16 @@ var StatTraining={
 				player.style-=1;
 				player.stress=0;
 				this.sudansprite.loadTexture("resting");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+12];
 				break;
-
 		} 
+
+		this.endofday=true;
+		this.charmtext.text="";
+		this.fitnesstext.text="";
+		this.smartstext.text="";
+		this.styletext.text="";
+
 		this.nextbutton=game.add.button(1100,350,"nextbutton",this.resetDay,this,"over","out","down");
 		this.nextbutton.scale.setTo(.75,.75);
 	},
@@ -191,15 +228,15 @@ var StatTraining={
 		buttonClicked.play();
 		this.sudansprite.loadTexture("base");
 		day++;
+		this.endofday=false;
 		this.nextbutton.destroy();
 		if(day>=30){ //on day 30, instead of the regular icons, we have a button to go to the DateNight
-			//this.song.stop(0); // stops music on day 30
 			let heartbutton=game.add.button(1050,250,"heart",function(){statTrainingBGM.stop();this.state.start("DateNight");},this); //when clicked, moves to DateNight
 			heartbutton.scale.setTo(.075,.075);
-			
 		}
 		else
 			this.setupButtons("icons");
+		this.message.text="";
 	},
 	setupButtons: function(actionoptions){ //sets up the buttons that correspond to the current actionoptions
 		console.log("StatTraining: setupButtons "+actionoptions);
@@ -440,8 +477,7 @@ var StatTraining={
 				buttontext1.anchor.y=.5;
 				buttonGroup.add(buttontext1);
 				break;
-		}
-
-	}
+			}
+		},
 };
 		var fortuneShow = false;
