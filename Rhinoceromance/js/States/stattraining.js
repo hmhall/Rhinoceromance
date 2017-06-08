@@ -163,40 +163,40 @@ var StatTraining={
 				this.sudansprite.loadTexture("exercising");
 				this.message.text=this.messages[Math.floor(Math.random()*3)+3];
 				break;
-			case "style1": 
-				player.style+=modStyle;
-				player.stress+=(stressStyle-1);
-				this.sudansprite.loadTexture("stylin");
-				this.message.text=this.messages[Math.floor(Math.random()*3)+6];
-				break;
-			case "style2": 
-				player.style+=(modStyle+1);
-				player.stress+=stressStyle;
-				this.sudansprite.loadTexture("stylin");
-				this.message.text=this.messages[Math.floor(Math.random()*3)+6];
-				break;
-			case "style3": 
-				player.style+=(modStyle+2);
-				player.stress+=(stressStyle+1);
-				this.sudansprite.loadTexture("stylin");
-				this.message.text=this.messages[Math.floor(Math.random()*3)+6];
-				break;
 			case "smarts1": 
 				player.smarts+=modSmarts;
 				player.stress+=(stressSmarts-1);
 				this.sudansprite.loadTexture("studying");
-				this.message.text=this.messages[Math.floor(Math.random()*3)+9];
+				this.message.text=this.messages[Math.floor(Math.random()*3)+6];
 				break;
 			case "smarts2": 
 				player.smarts+=(modSmarts+1);
 				player.smarts+=stressSmarts;
 				this.sudansprite.loadTexture("studying");
-				this.message.text=this.messages[Math.floor(Math.random()*3)+9];
+				this.message.text=this.messages[Math.floor(Math.random()*3)+6];
 				break;
 			case "smarts3": 
 				player.smarts+=(modSmarts+2);
 				player.stress+=(stressSmarts+1);
 				this.sudansprite.loadTexture("studying");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+6];
+				break;
+			case "style1": 
+				player.style+=modStyle;
+				player.stress+=(stressStyle-1);
+				this.sudansprite.loadTexture("stylin");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+9];
+				break;
+			case "style2": 
+				player.style+=(modStyle+1);
+				player.stress+=stressStyle;
+				this.sudansprite.loadTexture("stylin");
+				this.message.text=this.messages[Math.floor(Math.random()*3)+9];
+				break;
+			case "style3": 
+				player.style+=(modStyle+2);
+				player.stress+=(stressStyle+1);
+				this.sudansprite.loadTexture("stylin");
 				this.message.text=this.messages[Math.floor(Math.random()*3)+9];
 				break;
 			case "rest1": 
