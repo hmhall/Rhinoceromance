@@ -4,7 +4,7 @@ var Mainmenu={
 		console.log('Mainmenu: create');
 		this.stage.backgroundColor = "#CEF6F5";
 		game.add.tileSprite(0, 0, 1280, 720, "loading");
-		keypress = game.add.audio('keypress', 0.0001); 
+		keypress = game.add.audio('keypress'); 
 
 		mainMenuBGM = game.add.audio("mainMenuAudio",0.1,true);
 		mainMenuBGM.play();

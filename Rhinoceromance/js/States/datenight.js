@@ -216,7 +216,7 @@ var DateNight={
 			fontFamily: "blackFont",
 			fontSize: 32,
 			maxWidth: 800,
-			//sound: keypress,
+			sound: keypress,
 			time: 2,
 			dialogues: this.textarray,
 			dialogueEndFn: this.onTextEnd

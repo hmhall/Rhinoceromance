@@ -37,7 +37,7 @@ function Typewriter() {
 	document.addEventListener("click", MouseEventAction);
     function init(gameInstance, options) {
         game = gameInstance;
-        _that.time = options.time || Phaser.Timer.SECOND / 50;
+        _that.time = options.time || Phaser.Timer.SECOND / 50; //20ms per letter
         _that.sound = options.sound || null;
         _that.soundMarker = options.soundMarker || null;
         _that.writerFn = options.writerFn || null;
