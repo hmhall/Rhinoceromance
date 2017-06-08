@@ -2,8 +2,9 @@
 var DateNight={
 	create: function(){ //creates everything needed for the current main game state
 		console.log("DateNight: create");
-
-		//this.song = game.add.audio("dateState");
+		//sound
+		dateNightBGM = game.add.audio("dateStateAudio",0.1,true);
+		dateNightBGM.play();
 		//this.song.play('', 0, 1, true);
 
 		this.bg = game.add.sprite(0,0,"line");
@@ -215,7 +216,7 @@ var DateNight={
 			fontFamily: "blackFont",
 			fontSize: 32,
 			maxWidth: 800,
-			sound: this.keypress,
+			//sound: keypress,
 			time: 2,
 			dialogues: this.textarray,
 			dialogueEndFn: this.onTextEnd
@@ -225,7 +226,7 @@ var DateNight={
 	onTextEnd: function(){ //function called when current text has been clicked through. Generates buttons based on the part of the story, or simply moves to the next story part
 		switch(DateNight.storypart){
 			case "fatu_start":
-				let choicebutton1=game.add.button(440,360,"buttonsheet",function(){DateNight.statCheck("charm"); buttontext1.destroy(); choicebutton1.destroy(); buttontext2.destroy(); choicebutton2.destroy();},this,"over","out","down");
+				let choicebutton1=game.add.button(440,360,"buttonsheet",function(){buttonClicked.play();DateNight.statCheck("charm"); buttontext1.destroy(); choicebutton1.destroy(); buttontext2.destroy(); choicebutton2.destroy();},this,"over","out","down");
 				choicebutton1.scale.setTo(.75,.75);
 				choicebutton1.anchor.x=.5;
 				choicebutton1.anchor.y=.5;
@@ -233,7 +234,7 @@ var DateNight={
 				buttontext1.anchor.x=.5;
 				buttontext1.anchor.y=.5;
 
-				let choicebutton2=game.add.button(840,360,"buttonsheet",function(){DateNight.statCheck("style"); buttontext1.destroy(); choicebutton1.destroy(); buttontext2.destroy(); choicebutton2.destroy();},this,"over","out","down");
+				let choicebutton2=game.add.button(840,360,"buttonsheet",function(){buttonClicked.play();DateNight.statCheck("style"); buttontext1.destroy(); choicebutton1.destroy(); buttontext2.destroy(); choicebutton2.destroy();},this,"over","out","down");
 				choicebutton2.scale.setTo(.75,.75);
 				choicebutton2.anchor.x=.5;
 				choicebutton2.anchor.y=.5;
@@ -252,7 +253,7 @@ var DateNight={
 				break;
 			case "fatu_keyboardist":
 				DateNight.fatusprite.loadTexture("fatusurprise");
-				let choicebutton3=game.add.button(440,360,"buttonsheet",function(){DateNight.statCheck("smarts"); buttontext3.destroy(); choicebutton3.destroy(); buttontext4.destroy(); choicebutton4.destroy();},this,"over","out","down");
+				let choicebutton3=game.add.button(440,360,"buttonsheet",function(){buttonClicked.play();DateNight.statCheck("smarts"); buttontext3.destroy(); choicebutton3.destroy(); buttontext4.destroy(); choicebutton4.destroy();},this,"over","out","down");
 				choicebutton3.scale.setTo(.75,.75);
 				choicebutton3.anchor.x=.5;
 				choicebutton3.anchor.y=.5;
@@ -260,7 +261,7 @@ var DateNight={
 				buttontext3.anchor.x=.5;
 				buttontext3.anchor.y=.5;
 
-				let choicebutton4=game.add.button(840,360,"buttonsheet",function(){DateNight.statCheck("style"); buttontext3.destroy(); choicebutton3.destroy(); buttontext4.destroy(); choicebutton4.destroy();},this,"over","out","down");
+				let choicebutton4=game.add.button(840,360,"buttonsheet",function(){buttonClicked.play();DateNight.statCheck("style"); buttontext3.destroy(); choicebutton3.destroy(); buttontext4.destroy(); choicebutton4.destroy();},this,"over","out","down");
 				choicebutton4.scale.setTo(.75,.75);
 				choicebutton4.anchor.x=.5;
 				choicebutton4.anchor.y=.5;
@@ -277,7 +278,7 @@ var DateNight={
 				DateNight.readInText();
 				break;
 			case "fatu_mosh":
-				let choicebutton5=game.add.button(440,360,"buttonsheet",function(){DateNight.statCheck("fitness"); buttontext5.destroy(); choicebutton5.destroy(); buttontext6.destroy(); choicebutton6.destroy();},this,"over","out","down");
+				let choicebutton5=game.add.button(440,360,"buttonsheet",function(){buttonClicked.play();DateNight.statCheck("fitness"); buttontext5.destroy(); choicebutton5.destroy(); buttontext6.destroy(); choicebutton6.destroy();},this,"over","out","down");
 				choicebutton5.scale.setTo(.75,.75);
 				choicebutton5.anchor.x=.5;
 				choicebutton5.anchor.y=.5;
@@ -285,7 +286,7 @@ var DateNight={
 				buttontext5.anchor.x=.5;
 				buttontext5.anchor.y=.5;
 
-				let choicebutton6=game.add.button(840,360,"buttonsheet",function(){DateNight.statCheck("smarts"); buttontext5.destroy(); choicebutton5.destroy(); buttontext6.destroy(); choicebutton6.destroy();},this,"over","out","down");
+				let choicebutton6=game.add.button(840,360,"buttonsheet",function(){buttonClicked.play();DateNight.statCheck("smarts"); buttontext5.destroy(); choicebutton5.destroy(); buttontext6.destroy(); choicebutton6.destroy();},this,"over","out","down");
 				choicebutton6.scale.setTo(.75,.75);
 				choicebutton6.anchor.x=.5;
 				choicebutton6.anchor.y=.5;
@@ -302,7 +303,7 @@ var DateNight={
 				DateNight.readInText();
 				break;
 			case "fatu_dance":
-				let choicebutton7=game.add.button(440,360,"buttonsheet",function(){DateNight.statCheck("charm"); buttontext7.destroy(); choicebutton7.destroy(); buttontext8.destroy(); choicebutton8.destroy();},this,"over","out","down");
+				let choicebutton7=game.add.button(440,360,"buttonsheet",function(){buttonClicked.play();DateNight.statCheck("charm"); buttontext7.destroy(); choicebutton7.destroy(); buttontext8.destroy(); choicebutton8.destroy();},this,"over","out","down");
 				choicebutton7.scale.setTo(.75,.75);
 				choicebutton7.anchor.x=.5;
 				choicebutton7.anchor.y=.5;
@@ -310,7 +311,7 @@ var DateNight={
 				buttontext7.anchor.x=.5;
 				buttontext7.anchor.y=.5;
 
-				let choicebutton8=game.add.button(840,360,"buttonsheet",function(){DateNight.statCheck("fitness"); buttontext7.destroy(); choicebutton7.destroy(); buttontext8.destroy(); choicebutton8.destroy();},this,"over","out","down");
+				let choicebutton8=game.add.button(840,360,"buttonsheet",function(){buttonClicked.play();DateNight.statCheck("fitness"); buttontext7.destroy(); choicebutton7.destroy(); buttontext8.destroy(); choicebutton8.destroy();},this,"over","out","down");
 				choicebutton8.scale.setTo(.75,.75);
 				choicebutton8.anchor.x=.5;
 				choicebutton8.anchor.y=.5;
@@ -338,6 +339,7 @@ var DateNight={
 			case "fatu_end_success":
 				//this.song.stop(0);
 				game.state.start("Mainmenu");
+				dateNightBGM.stop();
 				newGame();
 				break;
 		}

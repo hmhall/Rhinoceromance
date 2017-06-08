@@ -6,7 +6,8 @@ var Gameover={
 		var startbutton = game.add.button(game.world.width/2, 125, "buttonsheet", this.restart, this, "over", "out", "down"); //add button
 		//this.add.text(game.world.width/2, 50,"Click the button to restart",{fontSize: "32px", fill: "white" });
 
-		//this.song = game.add.audio("gameOver");
+		gameOverBGM = game.add.audio("gameOverAudio",1,true);
+		gameOverBGM.play();
 		//this.song.play('', 0, 1, true);
 
 	},
@@ -15,6 +16,8 @@ var Gameover={
 		//this.song.stop(0);
 		game.state.start("Mainmenu");
 		newGame();
+		buttonClicked.play();
+		gameOverBGM.stop();
 		
 	}
 };

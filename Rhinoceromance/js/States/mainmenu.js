@@ -4,9 +4,11 @@ var Mainmenu={
 		console.log('Mainmenu: create');
 		this.stage.backgroundColor = "#CEF6F5";
 		game.add.tileSprite(0, 0, 1280, 720, "loading");
-		this.keypress = game.add.audio('keypress'); 
+		keypress = game.add.audio('keypress', 0.0001); 
 
-		//this.song = game.add.audio("mainMenu");
+		mainMenuBGM = game.add.audio("mainMenuAudio",0.1,true);
+		mainMenuBGM.play();
+
 		//this.song.play('', 0, 1, true);
 
 		var titletY = new Typewriter();
@@ -17,7 +19,7 @@ var Mainmenu={
 			fontSize: 32,
 			maxWidth: 650,
 			time: 2,
-			sound: this.keypress,
+			sound: keypress,
 			dialogues: ["In this game, you play as the last male northern white rhino.", "Your goal is to court one of two female rhinos to save your species.", "Chose activities to perform to raise your stats.", "As you perform stats, your stress level will rise. To lower stress, chose the rest activity.", "Be wary of your daily fortune, as your it will affect how well you perform each activity.", "Good luck, the future of the northern white rhinoceros species is in your hands!",],
 			dialogueEndFn: this.changeState
 		});
@@ -36,6 +38,7 @@ var Mainmenu={
 	},
 	changeState: function(){
 		//this.song.stop(0);
+		mainMenuBGM.stop();
 		game.state.start("StatTraining");
 	}	
 };
