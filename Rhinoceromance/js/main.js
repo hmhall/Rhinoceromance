@@ -10,5 +10,5 @@ game.state.add("MiniGames",MiniGames);
 game.state.add("DateNight", DateNight);
 game.state.add("Gameover",Gameover);
 game.state.start("Boot");
-
+// initialize variables
 newGame();

@@ -85,7 +85,7 @@ var StatTraining={
 	if (!fortuneShow){
 		console.log("tween");
 		for (xB=0;xB<this.buttonArray.length;xB++) this.buttonArray[xB].inputEnabled = false;
-		
+		// set group to add tween
 		fortuneGroup = game.add.group();
 		fMask = game.add.image(1011.2,0,"mask");
 		fortuneGroup.add(fMask);
@@ -95,7 +95,7 @@ var StatTraining={
 		let fortuneY = 420;
 		for (fDay=day;fDay<day+3;fDay++){
 			for (stat=0;stat<4;stat++){
-				
+				// switch for fortune
 				switch(fortune[fDay][stat][0]){
 				case -1:
 				let luckn=game.add.sprite(fortuneX,fortuneY,"luckn");fortuneGroup.add(luckn);break;
@@ -112,7 +112,9 @@ var StatTraining={
 			fortuneX+=xSpacing;
 
 		}
+		// scaling up to move daily fortune beyond game canvas
 		fortuneGroup.scale.set(1.5,1.5)
+		// tween sizing down so it would be visible
 		game.add.tween(fortuneGroup.scale).to( {x: 1, y: 1}, 500, Phaser.Easing.Back.InOut, true, 0, 0).yoyo(false);
 	}else{
 		console.log("destroying");
@@ -242,7 +244,7 @@ var StatTraining={
 	},
 	setupButtons: function(actionoptions){ //sets up the buttons that correspond to the current actionoptions
 		console.log("StatTraining: setupButtons "+actionoptions);
-
+		// set modifiers for the day
 		modCharm=fortune[day][0][1];
 		modFitness=fortune[day][1][1];
 		modSmarts=fortune[day][2][1];
