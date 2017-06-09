@@ -40,6 +40,6 @@ var Mainmenu={
 	changeState: function(){
 		//this.song.stop(0);
 		mainMenuBGM.stop();
-		game.state.start("StatTraining");
+		game.state.start("StatTraining", Phaser.Plugin.StateTransition.Out.SlideLeft, Phaser.Plugin.StateTransition.In.SlideLeft);
 	}	
 };

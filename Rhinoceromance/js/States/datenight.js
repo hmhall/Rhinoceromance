@@ -338,7 +338,7 @@ var DateNight={
 			case "fatu_end_failure":
 			case "fatu_end_success":
 				//this.song.stop(0);
-				game.state.start("Mainmenu");
+				game.state.start("Mainmenu", Phaser.Plugin.StateTransition.Out.SlideRight, Phaser.Plugin.StateTransition.In.SlideRight);
 				dateNightBGM.stop();
 				newGame();
 				break;

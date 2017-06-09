@@ -76,7 +76,7 @@ var StatTraining={
 		}
 		
 		if (player.stress < 0) stress=0; //ensures stress is never below 0
-		if (player.stress > 9) {statTrainingBGM.stop();this.state.start("Gameover");} //lose game if stress hits 10 and stops music
+		if (player.stress > 9) {statTrainingBGM.stop();this.state.start("Gameover", Phaser.Plugin.StateTransition.Out.SlideRight, Phaser.Plugin.StateTransition.In.SlideRight);} //lose game if stress hits 10 and stops music
 		
 	},
 	toggleFortune: function() { //opens/closes the daily fortune menu when button is pressed
@@ -232,7 +232,7 @@ var StatTraining={
 		this.endofday=false;
 		this.nextbutton.destroy();
 		if(day>=30){ //on day 30, instead of the regular icons, we have a button to go to the DateNight
-			let heartbutton=game.add.button(1050,250,"heart",function(){statTrainingBGM.stop();this.state.start("DateNight");},this); //when clicked, moves to DateNight
+			let heartbutton=game.add.button(1050,250,"heart",function(){statTrainingBGM.stop();this.state.start("DateNight", Phaser.Plugin.StateTransition.Out.SlideRight, Phaser.Plugin.StateTransition.In.SlideRight);},this); //when clicked, moves to DateNight
 			heartbutton.scale.setTo(.075,.075);
 		}
 		else
