@@ -41,9 +41,4 @@ function newGame(){
 	player.smarts=10;
 	player.style=10;
 	player.stress=0;
-	player.arrive = false;
-	player.order = false;
-	player.etiquette = false;
-	player.topic = false;
-	actiontaken=0;
 }

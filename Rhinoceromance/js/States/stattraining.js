@@ -76,7 +76,7 @@ var StatTraining={
 		}
 		
 		if (player.stress < 0) stress=0; //ensures stress is never below 0
-		if (player.stress > 9) {statTrainingBGM.stop();this.state.start("Gameover");} //lose game if stress hits 10 and stops music
+		if (player.stress > 9) {statTrainingBGM.stop();this.state.start("Gameover", Phaser.Plugin.StateTransition.Out.SlideRight, Phaser.Plugin.StateTransition.In.SlideRight);} //lose game if stress hits 10 and stops music
 		
 	},
 	toggleFortune: function() { //opens/closes the daily fortune menu when button is pressed
@@ -85,7 +85,7 @@ var StatTraining={
 	if (!fortuneShow){
 		console.log("tween");
 		for (xB=0;xB<this.buttonArray.length;xB++) this.buttonArray[xB].inputEnabled = false;
-		
+		// set group to add tween
 		fortuneGroup = game.add.group();
 		fMask = game.add.image(1011.2,0,"mask");
 		fortuneGroup.add(fMask);
@@ -95,7 +95,7 @@ var StatTraining={
 		let fortuneY = 420;
 		for (fDay=day;fDay<day+3;fDay++){
 			for (stat=0;stat<4;stat++){
-				
+				// switch for fortune
 				switch(fortune[fDay][stat][0]){
 				case -1:
 				let luckn=game.add.sprite(fortuneX,fortuneY,"luckn");fortuneGroup.add(luckn);break;
@@ -112,7 +112,9 @@ var StatTraining={
 			fortuneX+=xSpacing;
 
 		}
+		// scaling up to move daily fortune beyond game canvas
 		fortuneGroup.scale.set(1.5,1.5)
+		// tween sizing down so it would be visible
 		game.add.tween(fortuneGroup.scale).to( {x: 1, y: 1}, 500, Phaser.Easing.Back.InOut, true, 0, 0).yoyo(false);
 	}else{
 		console.log("destroying");
@@ -232,7 +234,7 @@ var StatTraining={
 		this.endofday=false;
 		this.nextbutton.destroy();
 		if(day>=30){ //on day 30, instead of the regular icons, we have a button to go to the DateNight
-			let heartbutton=game.add.button(1050,250,"heart",function(){statTrainingBGM.stop();this.state.start("DateNight");},this); //when clicked, moves to DateNight
+			let heartbutton=game.add.button(1050,250,"heart",function(){statTrainingBGM.stop();this.state.start("DateNight", Phaser.Plugin.StateTransition.Out.SlideRight, Phaser.Plugin.StateTransition.In.SlideRight);},this); //when clicked, moves to DateNight
 			heartbutton.scale.setTo(.075,.075);
 		}
 		else
@@ -242,7 +244,7 @@ var StatTraining={
 	},
 	setupButtons: function(actionoptions){ //sets up the buttons that correspond to the current actionoptions
 		console.log("StatTraining: setupButtons "+actionoptions);
-
+		// set modifiers for the day
 		modCharm=fortune[day][0][1];
 		modFitness=fortune[day][1][1];
 		modSmarts=fortune[day][2][1];
