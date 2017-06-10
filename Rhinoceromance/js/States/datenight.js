@@ -214,7 +214,7 @@ var DateNight={
 			x: 100,
 			y: 500,
 			fontFamily: "custom",
-			fontSize: 48,
+			fontSize: 32,
 			maxWidth: 800,
 			sound: keypress,
 			time: 2,
