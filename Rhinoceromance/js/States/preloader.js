@@ -22,7 +22,7 @@ var Preloader={
 		this.load.image("fatuhappy","img/fatuhappy.png");
 		this.load.image("fatusurprise","img/fatusurprise.png");
 		this.load.image("heart","img/heart.png");
-		this.load.image("brokenheart","img/broken_heart.png");
+		//this.load.image("brokenheart","img/broken_heart.png");
 		this.load.image("apartment","img/bg.png");
 		this.load.image("base","img/base.png");
 		this.load.image("statwindow","img/statwindow.png");
