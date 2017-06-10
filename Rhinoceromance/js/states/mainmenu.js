@@ -17,7 +17,7 @@ var Mainmenu={
 			y: 300,
 			//fontFamily: "blackFont",
 			fontFamily: "custom",
-			fontSize: 32,
+			fontSize: 64,
 			maxWidth: 650,
 			time: 2,
 			sound: keypress,
