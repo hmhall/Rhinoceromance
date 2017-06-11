@@ -66,6 +66,7 @@ var StatTraining={
 	update: function(){
 		
 		this.stressBar.setPercent(100-player.stress*10);
+		if (player.stress < 0) stress=0; //ensures stress is never below 0
 		
 		if(!this.endofday){
 			this.daytext.text="Day: "+day; //updates text
@@ -75,7 +76,7 @@ var StatTraining={
 			this.styletext.text="Style: "+player.style;
 		}
 		
-		if (player.stress < 0) stress=0; //ensures stress is never below 0
+		
 		if (player.stress > 9) {statTrainingBGM.stop();this.state.start("Gameover", Phaser.Plugin.StateTransition.Out.SlideRight, Phaser.Plugin.StateTransition.In.SlideRight);} //lose game if stress hits 10 and stops music
 		
 	},
@@ -253,6 +254,8 @@ var StatTraining={
 		stressFitness=fortune[day][1][2];
 		stressSmarts=fortune[day][2][2];
 		stressStyle= fortune[day][3][2];
+
+		this.buttonArray=[];
 
 		var buttonGroup=game.add.group();
 
